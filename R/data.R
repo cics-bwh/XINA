@@ -35,6 +35,42 @@ NULL
 #' @name hprd_ppi
 NULL
 
+#' Protein-protein interaction resource downloaded from STRING DB for XINA's example dataset
+#' A data frame containing protein-protein interactions
+#' string_example
+#'
+#' \itemize{
+#'   \item gene_symbol_1. Gene name interacting with gene name in 'gene_symbol_2'
+#'   \item gene_symbol_2. Gene name interacting with gene name in 'gene_symbol_1'
+#'   \item PPI_Source. Data original source
+#' }
+#'
+#' @format A data frame containing STRING protein-protein interaction data
+#' @source \url{https://string-db.org/}
+#' @name string_example
+NULL
+
+#' Previously processed xina analysis using XINA's random example data
+#' A list containing 'xina_analysis' results
+#' xina_result_example
+#'
+#' \itemize{
+#'   \item All_network. PPI network of all the input proteins
+#'   \item Sub_network. A list containing PPI networks of each clusters
+#'   \item Data. XINA clustering results. See \link[XINA]{xina_clustering}
+#'   \item Nodes. A list of proteins in each cluster
+#'   \item Conditions. A list of experimental condition of proteins in each cluster
+#'   \item Titles.  A list of plot titles for XINA plotting
+#'   \item out_dir. A directory path storing XINA network analysis results
+#'   \item is_stringdb. False = different PPI DB and TRUE = STRING DB
+
+#' }
+#'
+#' @format A data frame containing STRING protein-protein interaction data
+#' @source XINA
+#' @name xina_result_example
+NULL
+
 #' A character vector containing 19,396 human genes
 #' This is for the randome data generation of XINA
 #' gn

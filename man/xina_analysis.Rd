@@ -46,26 +46,22 @@ and a list containing XINA network analysis results.
 xina_analysis is to analyze protein-protein interaction(PPI) networks using STRINGdb and igraph R package. This module computes PPI networks within each XINA clusters.
 }
 \examples{
-\dontrun{
-library(STRINGdb)
-library(igraph)
-
 # load XINA example data
 data(xina_example)
 
-# Get STRING database for protein-protein intereaction information
-string_db <- STRINGdb$new( version="10", species=9606, score_threshold=0,
-input_directory="" )
+# use the following code for utilizing up-to-date STRING DB
+tax_id <- 9606  # for human
+# tax_id <- 10090  # for mouse
+library(STRINGdb)
+library(igraph)
+string_db <- STRINGdb$new( version='10', species=tax_id, score_threshold=0, input_directory='' )
 string_db
-
-# Run XINA analysis with STRING DB
-xina_result <- xina_analysis(example_clusters, string_db)
+xina_result <- xina_analysis(example_clusters, string_db, flag_simplify=FALSE)
 
 # Run XINA with a protein-protein interaction edgelist
 data(HPRD)
-net_all <- simplify(graph_from_data_frame(d=hprd_ppi, directed=F),
-remove.multiple = F, remove.loops = T)
-xina_result <- xina_analysis(example_clusters, net_all, is_stringdb=FALSE)
-}
+net_all <- simplify(graph_from_data_frame(d=hprd_ppi, directed=FALSE),
+remove.multiple = FALSE, remove.loops = TRUE)
+xina_result <- xina_analysis(example_clusters, net_all, is_stringdb=FALSE, flag_simplify=FALSE)
 
 }

@@ -21,21 +21,10 @@ Comma-separated file containing aligned XINA clustering results.
 Get previous XINA clustering results to R space
 }
 \examples{
-
-# Generate random multiplexed time-series data
-random_data_info <- make_random_xina_data()
-
-# Data files
-data_files <- paste(random_data_info$conditions, ".csv", sep='')
-
-# time points of the data matrix
-data_column <- random_data_info$time_points
-
-# mclust requires the fixed random seed to get reproduce the clustering results
-set.seed(0)
-
-# Run the model-based clustering
-example_clusters <- xina_clustering(data_files, data_column=data_column, nClusters=30)
+# Load XINA's example data
+data(xina_example)
+write.csv(example_clusters$aligned,"xina_clusters_aligned.csv")
+write.csv(example_clusters$clusters,"xina_clusters.csv")
 
 # Reload the clustering result
 example_clusters_reloaded <- load_previous_results(".")

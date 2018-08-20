@@ -2,7 +2,6 @@
 
 export(alluvial_enriched)
 export(draw_alluvial_plot)
-export(generate_superset)
 export(get_comigrations_by_name)
 export(get_condition_biased_comigrations)
 export(get_unknown_ppi_nodes)

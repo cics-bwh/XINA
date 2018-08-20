@@ -30,15 +30,9 @@ options(warn=1)
 #' g2 <- read.csv("Stimulus1.csv", check.names=FALSE, stringsAsFactors = FALSE)
 #' g3 <- read.csv("Stimulus2.csv", check.names=FALSE, stringsAsFactors = FALSE)
 #'
-#' # Model-based clustering
-#' example_clusters <- xina_clustering(c("Control.csv","Stimulus1.csv","Stimulus2.csv"),
-#' data_column=c("0hr","6hr","12hr","24hr","48hr","72hr"), nClusters=30)
-#'
-#' # Plot clustered plots
-#' plot_clusters(example_clusters)
-#'
-#' # Plot pie-charts of condition composition
-#' condition_composition <- plot_condition_compositions(example_clusters)
+#' head(g1)
+#' head(g2)
+#' head(g3)
 #'
 make_random_xina_data <- function(n=500, mtor=TRUE,
                                   time_points=c("0hr", "2hr", "6hr", "12hr", "24hr", "48hr", "72hr"),
@@ -194,21 +188,10 @@ extract_data_column <- function(col_head_of_clustering){
 #' @import utils
 #' @export
 #' @examples
-#'
-#' # Generate random multiplexed time-series data
-#' random_data_info <- make_random_xina_data()
-#'
-#' # Data files
-#' data_files <- paste(random_data_info$conditions, ".csv", sep='')
-#'
-#' # time points of the data matrix
-#' data_column <- random_data_info$time_points
-#'
-#' # mclust requires the fixed random seed to get reproduce the clustering results
-#' set.seed(0)
-#'
-#' # Run the model-based clustering
-#' example_clusters <- xina_clustering(data_files, data_column=data_column, nClusters=30)
+#' # Load XINA's example data
+#' data(xina_example)
+#' write.csv(example_clusters$aligned,"xina_clusters_aligned.csv")
+#' write.csv(example_clusters$clusters,"xina_clusters.csv")
 #'
 #' # Reload the clustering result
 #' example_clusters_reloaded <- load_previous_results(".")
@@ -316,7 +299,6 @@ organize_clusters <- function(clustering_dir=getwd(), super_ds, file_out=TRUE)
 #' @import utils
 #' @export
 #' @examples
-#'
 #' # Generate random multiplexed time-series data
 #' random_data_info <- make_random_xina_data()
 #'
@@ -415,7 +397,6 @@ xina_clustering <- function(f_names, data_column, out_dir=getwd(), nClusters=20,
 #' Default is 'sum_normalization'.
 #' @import tools
 #' @import utils
-#' @export
 #' @return A data frame containing kinetics data obtained from files in the f_names vector
 generate_superset <- function(f_names, data_column, delim=",", norm="sum_normalization")
 {
@@ -474,20 +455,15 @@ generate_superset <- function(f_names, data_column, delim=",", norm="sum_normali
 #' @import igraph
 #' @export
 #' @examples
-#' library(STRINGdb)
-#'
 #' # load XINA example data
 #' data(xina_example)
 #'
-#' # Get STRING database for protein-protein intereaction information
-#' string_db <- STRINGdb$new( version='10', species=9606, score_threshold=0, input_directory='' )
-#' string_db
-#'
-#' # XINA analysis with STRING DB
-#' xina_result <- xina_analysis(example_clusters, string_db, flag_simplify=FALSE)
+#' # load the previously processed XINA analysis results
+#' # if you want to learn how to run 'xina_analysis', please see \link[XINA]{xina_analysis}
+#' data(xina_result_example)
 #'
 #' # Extract unknown PPI nodes in the cluster #1
-#' get_unknown_ppi_nodes(xina_result, 1)
+#' get_unknown_ppi_nodes(xina_result_example, 1)
 #'
 get_unknown_ppi_nodes <- function(xina_result, cl){
   subnet <- xina_result$Sub_network[[cl]]
@@ -565,27 +541,23 @@ add_legend <- function(legend_location="bottomright", ...) {
 #' @import igraph
 #' @export
 #' @examples
-#' library(STRINGdb)
-#' library(Biobase)
-#'
-#' # load XINA example data
+#' ## the following code is to show how it works quickly
+#' ## load XINA example data
 #' data(xina_example)
 #'
-#' # Get STRING database for protein-protein intereaction information
-#' string_db <- STRINGdb$new( version='10', species=9606, score_threshold=0, input_directory='' )
-#' string_db
+#' ## load the previously processed XINA analysis results
+#' # if you want to learn how to run 'xina_analysis', please see \link[XINA]{xina_analysis}
+#' data(xina_result_example)
 #'
-#' # XINA analysis with STRING DB
-#' xina_result <- xina_analysis(example_clusters, string_db)
-#'
+#' # get gene names that are clustered to #21 in "Stimulus2" condition
 #' subgroup <- subset(example_clusters$aligned, Stimulus2==21)
 #' protein_list <- subgroup$`Gene name`
 #'
 #' # Calculate protein-protein interaction network
-#' xina_plot_single(xina_result, protein_list)
+#' xina_plot_single(xina_result_example, protein_list)
 #'
 #' # Calculate protein-protein interaction network and Eigenvector centrality
-#' eigen_info <- xina_plot_single(xina_result, protein_list, centrality_type='Eigenvector')
+#' eigen_info <- xina_plot_single(xina_result_example, protein_list, centrality_type='Eigenvector')
 #'
 xina_plot_single <- function(xina_result, protein_list, centrality_type=NULL,
                              layout_specified='', vertex_label_flag=TRUE, main=NULL,
@@ -731,23 +703,19 @@ xina_plot_single <- function(xina_result, protein_list, centrality_type=NULL,
 #' @import igraph
 #' @export
 #' @examples
-#' library(STRINGdb)
-#'
-#' # load XINA example data
+#' ## the following code is to show how it works quickly
+#' ## load XINA example data
 #' data(xina_example)
 #'
-#' # Get STRING database for protein-protein intereaction information
-#' string_db <- STRINGdb$new( version='10', species=9606, score_threshold=0, input_directory='' )
-#' string_db
-#'
-#' # XINA analysis with STRING DB
-#' xina_result <- xina_analysis(example_clusters, string_db)
+#' ## load the previously processed XINA analysis results
+#' # if you want to learn how to run 'xina_analysis', please see \link[XINA]{xina_analysis}
+#' data(xina_result_example)
 #'
 #' # plot cluster #1
-#' xina_plot_bycluster(xina_result, example_clusters, cl=1)
+#' xina_plot_bycluster(xina_result_example, example_clusters, cl=1)
 #'
 #' # plot PPI network of Control condition in cluster #1
-#' xina_plot_bycluster(xina_result, example_clusters, cl=1, condition='Control')
+#' xina_plot_bycluster(xina_result_example, example_clusters, cl=1, condition='Control')
 #'
 xina_plot_bycluster <- function(xina_result, clustering_result,
                                 cl=NULL, condition='all', flag_legend=TRUE,
@@ -871,23 +839,19 @@ xina_plot_bycluster <- function(xina_result, clustering_result,
 #' @import graphics
 #' @export
 #' @examples
-#' library(STRINGdb)
-#'
-#' # load XINA example data
+#' ## the following code is to show how it works quickly
+#' ## load XINA example data
 #' data(xina_example)
 #'
-#' # Get STRING database for protein-protein intereaction information
-#' string_db <- STRINGdb$new( version='10', species=9606, score_threshold=0, input_directory='' )
-#' string_db
-#'
-#' # XINA analysis with STRING DB
-#' xina_result <- xina_analysis(example_clusters, string_db)
+#' ## load the previously processed XINA analysis results
+#' # if you want to learn how to run 'xina_analysis', please see \link[XINA]{xina_analysis}
+#' data(xina_result_example)
 #'
 #' # XINA network plots
-#' xina_plot_all(xina_result, example_clusters)
+#' xina_plot_all(xina_result_example, example_clusters)
 #'
 #' # XINA network plots for Control condition
-#' xina_plot_all(xina_result, example_clusters, condition='Control')
+#' xina_plot_all(xina_result_example, example_clusters, condition='Control')
 #'
 xina_plot_all <- function(xina_result, clustering_result, condition='all',
                           centrality_type=NULL, flag_simplify=TRUE, num_breaks=5,
@@ -952,6 +916,7 @@ xina_plot_all <- function(xina_result, clustering_result, condition='all',
 #' @import ggplot2
 #' @export
 #' @examples
+#' \dontrun{
 #' library(STRINGdb)
 #'
 #' # load XINA example data
@@ -974,6 +939,7 @@ xina_plot_all <- function(xina_result, clustering_result, condition='all',
 #' kegg_enriched <- xina_enrichment(string_db, protein_list,
 #' enrichment_type = "KEGG", pval_threshold=0.1)
 #' plot_enrichment_results(kegg_enriched$KEGG, num_terms=10)
+#' }
 #'
 plot_enrichment_results <- function(enriched_results, term_description="term_description",
                                     sig_score="pvalue", num_terms=0, get_log=TRUE){
@@ -1081,7 +1047,6 @@ get_stats <- function(centrality_results, na.rm=FALSE) {
 #' @return A data frame containing statistics of XINA network centrality scores
 #' @export
 #' @examples
-#'
 #' # load XINA example data
 #' data(xina_example)
 #'
@@ -1943,6 +1908,7 @@ rank_centrality <- function(centrality_score, type, num_breaks=5){
 #' @export
 #' @import STRINGdb
 #' @examples
+#' \dontrun{
 #' library(STRINGdb)
 #' library(Biobase)
 #'
@@ -1969,6 +1935,7 @@ rank_centrality <- function(centrality_score, type, num_breaks=5){
 #' go_enriched <- xina_enrichment(string_db, protein_list,
 #' enrichment_type = "GO", pval_threshold=0.1)
 #' plot_enrichment_results(go_enriched$Component, num_terms=10)
+#' }
 #'
 xina_enrichment <- function(string_db, protein_list, enrichment_type="GO",
                             pval_threshold=0.05, methodMT='fdr') {
@@ -2021,27 +1988,23 @@ xina_enrichment <- function(string_db, protein_list, enrichment_type="GO",
 #' @import graphics
 #' @export
 #' @examples
-#' \dontrun{
-#' library(STRINGdb)
-#' library(igraph)
-#'
 #' # load XINA example data
 #' data(xina_example)
 #'
-#' # Get STRING database for protein-protein intereaction information
-#' string_db <- STRINGdb$new( version="10", species=9606, score_threshold=0,
-#' input_directory="" )
+#' # use the following code for utilizing up-to-date STRING DB
+#' tax_id <- 9606  # for human
+#' # tax_id <- 10090  # for mouse
+#' library(STRINGdb)
+#' library(igraph)
+#' string_db <- STRINGdb$new( version='10', species=tax_id, score_threshold=0, input_directory='' )
 #' string_db
-#'
-#' # Run XINA analysis with STRING DB
-#' xina_result <- xina_analysis(example_clusters, string_db)
+#' xina_result <- xina_analysis(example_clusters, string_db, flag_simplify=FALSE)
 #'
 #' # Run XINA with a protein-protein interaction edgelist
 #' data(HPRD)
-#' net_all <- simplify(graph_from_data_frame(d=hprd_ppi, directed=F),
-#' remove.multiple = F, remove.loops = T)
-#' xina_result <- xina_analysis(example_clusters, net_all, is_stringdb=FALSE)
-#' }
+#' net_all <- simplify(graph_from_data_frame(d=hprd_ppi, directed=FALSE),
+#' remove.multiple = FALSE, remove.loops = TRUE)
+#' xina_result <- xina_analysis(example_clusters, net_all, is_stringdb=FALSE, flag_simplify=FALSE)
 #'
 xina_analysis <- function(clustering_result, ppi_db, is_stringdb=TRUE, flag_simplify=TRUE,
                           node_shape="sphere", num_clusters_in_row=5, img_size=NULL, img_qual=300) {
@@ -2091,7 +2054,7 @@ xina_analysis <- function(clustering_result, ppi_db, is_stringdb=TRUE, flag_simp
     net_all <- subnet
     # analyze user-defined PPI database
   } else {
-    superset_string <- NULL
+    superset_string <- super_ds
     net_all <- ppi_db
   }
   vertices <- as.vector(V(net_all)$name)

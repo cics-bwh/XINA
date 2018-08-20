@@ -26,6 +26,7 @@ A list of data frames containing enrichment results
 xina_enrichment conducts functional enrichment tests using gene ontology or KEGG pathway terms for a given protein list
 }
 \examples{
+\dontrun{
 library(STRINGdb)
 library(Biobase)
 
@@ -52,5 +53,6 @@ plot_enrichment_results(kegg_enriched$KEGG, num_terms=10)
 go_enriched <- xina_enrichment(string_db, protein_list,
 enrichment_type = "GO", pval_threshold=0.1)
 plot_enrichment_results(go_enriched$Component, num_terms=10)
+}
 
 }

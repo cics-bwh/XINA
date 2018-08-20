@@ -28,6 +28,7 @@ ggplot bar graph
 Plot GO and KEGG enrichment results
 }
 \examples{
+\dontrun{
 library(STRINGdb)
 
 # load XINA example data
@@ -50,5 +51,6 @@ protein_list <- as.vector(subgroup$`Gene name`)
 kegg_enriched <- xina_enrichment(string_db, protein_list,
 enrichment_type = "KEGG", pval_threshold=0.1)
 plot_enrichment_results(kegg_enriched$KEGG, num_terms=10)
+}
 
 }

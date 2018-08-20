@@ -18,19 +18,14 @@ A data frame containing proteins with no known interactions within the cluster b
 Get proteins with no known interactions within the cluster based on the used protein-protein interaction database source
 }
 \examples{
-library(STRINGdb)
-
 # load XINA example data
 data(xina_example)
 
-# Get STRING database for protein-protein intereaction information
-string_db <- STRINGdb$new( version='10', species=9606, score_threshold=0, input_directory='' )
-string_db
-
-# XINA analysis with STRING DB
-xina_result <- xina_analysis(example_clusters, string_db, flag_simplify=FALSE)
+# load the previously processed XINA analysis results
+# if you want to learn how to run 'xina_analysis', please see \\link[XINA]{xina_analysis}
+data(xina_result_example)
 
 # Extract unknown PPI nodes in the cluster #1
-get_unknown_ppi_nodes(xina_result, 1)
+get_unknown_ppi_nodes(xina_result_example, 1)
 
 }

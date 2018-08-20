@@ -101,9 +101,9 @@ XINA also supports k-means clustering as well as the model-based clustering
 clustering_result_km <- xina_clustering(data_files, data_column=data_column, nClusters=30, chosen_model='kmeans')
 ```
 
-The clustering results are stored in the sub-directory "xina_results/clustering" of your working directory.  XINA clustering generates BICindex plot containing the BIC of each covariance matrix ifor each number of clusters. 'xina_clusters.csv' has a long list of XINA cluster results. 'xina_clusters_aligned.csv' has clustering results arranged by gene name. If you want to recall previous clustering results, you can use 'load_previous_results'
-```{r load previous data, eval=FALSE}
-clustering_result_reloaded <- load_previous_results("./xina_results/clustering/")
+The clustering results are stored in your working directory.  XINA clustering generates the mclust BIC plot containing the BIC of each covariance matrix ifor each number of clusters. 'xina_clusters.csv' has a long list of XINA cluster results. 'xina_clusters_aligned.csv' has clustering results arranged by gene name. If you want to recall previous clustering results, you can use 'load_previous_results'
+```{r load previous data}
+clustering_result_reloaded <- load_previous_results()
 head(clustering_result_reloaded$aligned)
 ```
 
@@ -255,19 +255,19 @@ xina_result <- xina_analysis(example_clusters, string_db)
 ```
 
 If you want to use another PPI information instead of STRING DB, you can use a data frame containing PPI information.  For example, XINA provides PPI information of HPRD DB datase.
-```{r HPRD PPI network, eval=FALSE}
+```{r HPRD PPI network}
 # Construct HPRD PPI network
 data(HPRD)
 ppi_db_hprd <- simplify(graph_from_data_frame(d=hprd_ppi, directed=FALSE), remove.multiple = FALSE, remove.loops = TRUE)
 head(hprd_ppi)
 ```
 
-```{r XINA analysis with HPRD, eval=FALSE}
+```{r XINA analysis with HPRD}
 # Run XINA with HPRD protein-protein interaction database
 xina_result_hprd <- xina_analysis(example_clusters, ppi_db_hprd, is_stringdb=FALSE)
 ```
 
-You can draw PPI networks of all the XINA clusters using 'xina_plots' function easily.  PPI network plots will be stored in the sub-directory "xina_results/networks"
+You can draw PPI networks of all the XINA clusters using 'xina_plots' function easily.  PPI network plots will be stored in the working directory
 ```{r plotting PPI networks of all the clusters, eval=FALSE}
 # XINA network plots labeled gene names
 xina_plots(xina_result, example_clusters)
@@ -402,7 +402,7 @@ plot_enrichment_results(kegg_enriched$KEGG, num_terms=20)
 ```
 
 GO enrichment results using STRING DB
-```{r enrichment test of the comigrated proteins2}
+```{r enrichment test of the comigrated proteins2, eval=FALSE}
 # Enrichment test using GO pathway terms
 go_enriched <- xina_enrichment(string_db, protein_list, enrichment_type = "GO", pval_threshold=0.1)
 head(go_enriched$Process)

@@ -93,22 +93,18 @@ PNG images of PPI network plots of all the clusters
 xina_plot_all is to draw protein-protein interaction network plots of all the clusters
 }
 \examples{
-library(STRINGdb)
-
-# load XINA example data
+## the following code is to show how it works quickly
+## load XINA example data
 data(xina_example)
 
-# Get STRING database for protein-protein intereaction information
-string_db <- STRINGdb$new( version='10', species=9606, score_threshold=0, input_directory='' )
-string_db
-
-# XINA analysis with STRING DB
-xina_result <- xina_analysis(example_clusters, string_db)
+## load the previously processed XINA analysis results
+# if you want to learn how to run 'xina_analysis', please see \\link[XINA]{xina_analysis}
+data(xina_result_example)
 
 # XINA network plots
-xina_plot_all(xina_result, example_clusters)
+xina_plot_all(xina_result_example, example_clusters)
 
 # XINA network plots for Control condition
-xina_plot_all(xina_result, example_clusters, condition='Control')
+xina_plot_all(xina_result_example, example_clusters, condition='Control')
 
 }

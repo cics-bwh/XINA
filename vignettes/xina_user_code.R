@@ -58,9 +58,9 @@ clustering_result <- xina_clustering(data_files, data_column=data_column, nClust
 ## ----XINA with k-means clustering----------------------------------------
 clustering_result_km <- xina_clustering(data_files, data_column=data_column, nClusters=30, chosen_model='kmeans')
 
-## ----load previous data, eval=FALSE--------------------------------------
-#  clustering_result_reloaded <- load_previous_results("./xina_results/clustering/")
-#  head(clustering_result_reloaded$aligned)
+## ----load previous data--------------------------------------------------
+clustering_result_reloaded <- load_previous_results()
+head(clustering_result_reloaded$aligned)
 
 ## ----load xina_example---------------------------------------------------
 data(xina_example)
@@ -283,12 +283,12 @@ head(kegg_enriched$KEGG)
 # plot enrichment test results
 plot_enrichment_results(kegg_enriched$KEGG, num_terms=20)
 
-## ----enrichment test of the comigrated proteins2-------------------------
-# Enrichment test using GO pathway terms
-go_enriched <- xina_enrichment(string_db, protein_list, enrichment_type = "GO", pval_threshold=0.1)
-head(go_enriched$Process)
-head(go_enriched$Function)
-head(go_enriched$Component)
+## ----enrichment test of the comigrated proteins2, eval=FALSE-------------
+#  # Enrichment test using GO pathway terms
+#  go_enriched <- xina_enrichment(string_db, protein_list, enrichment_type = "GO", pval_threshold=0.1)
+#  head(go_enriched$Process)
+#  head(go_enriched$Function)
+#  head(go_enriched$Component)
 
 ## ----draw GO enrichment results, eval=FALSE------------------------------
 #  plot_enrichment_results(go_enriched$Process, num_terms=20)

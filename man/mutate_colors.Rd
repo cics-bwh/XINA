@@ -25,7 +25,6 @@ If any clusters have higher percentage than the 'threshold_percent', XINA will a
 If not, XINA will give 'gray' color or user-defined color via 'null_color' parameter.
 }
 \examples{
-
 # load XINA example data
 data(xina_example)
 

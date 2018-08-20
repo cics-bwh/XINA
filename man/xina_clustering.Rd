@@ -45,7 +45,6 @@ a plot containing a BIC plot in current working directory and a list containing 
 Clustering multiplexed time-series omics data to find co-abundance profiles
 }
 \examples{
-
 # Generate random multiplexed time-series data
 random_data_info <- make_random_xina_data()
 

@@ -33,14 +33,8 @@ g1 <- read.csv("Control.csv", check.names=FALSE, stringsAsFactors = FALSE)
 g2 <- read.csv("Stimulus1.csv", check.names=FALSE, stringsAsFactors = FALSE)
 g3 <- read.csv("Stimulus2.csv", check.names=FALSE, stringsAsFactors = FALSE)
 
-# Model-based clustering
-example_clusters <- xina_clustering(c("Control.csv","Stimulus1.csv","Stimulus2.csv"),
-data_column=c("0hr","6hr","12hr","24hr","48hr","72hr"), nClusters=30)
-
-# Plot clustered plots
-plot_clusters(example_clusters)
-
-# Plot pie-charts of condition composition
-condition_composition <- plot_condition_compositions(example_clusters)
+head(g1)
+head(g2)
+head(g3)
 
 }

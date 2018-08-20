@@ -86,26 +86,22 @@ of all the clusters and a list containing XINA network analysis results
 xina_plot_single draws protein-protein interaction network plot for given 'protein_list'.
 }
 \examples{
-library(STRINGdb)
-library(Biobase)
-
-# load XINA example data
+## the following code is to show how it works quickly
+## load XINA example data
 data(xina_example)
 
-# Get STRING database for protein-protein intereaction information
-string_db <- STRINGdb$new( version='10', species=9606, score_threshold=0, input_directory='' )
-string_db
+## load the previously processed XINA analysis results
+# if you want to learn how to run 'xina_analysis', please see \\link[XINA]{xina_analysis}
+data(xina_result_example)
 
-# XINA analysis with STRING DB
-xina_result <- xina_analysis(example_clusters, string_db)
-
+# get gene names that are clustered to #21 in "Stimulus2" condition
 subgroup <- subset(example_clusters$aligned, Stimulus2==21)
 protein_list <- subgroup$`Gene name`
 
 # Calculate protein-protein interaction network
-xina_plot_single(xina_result, protein_list)
+xina_plot_single(xina_result_example, protein_list)
 
 # Calculate protein-protein interaction network and Eigenvector centrality
-eigen_info <- xina_plot_single(xina_result, protein_list, centrality_type='Eigenvector')
+eigen_info <- xina_plot_single(xina_result_example, protein_list, centrality_type='Eigenvector')
 
 }
