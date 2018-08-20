@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1534600430826.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "1ABB397C",
+    "lastKnownWriteTime" : 1534775639,
+    "last_content_update" : 1534775639331,
+    "path" : "~/Syncplicity Folders/XINA/Bioconductor/XINA/R/xina.R",
+    "project_path" : "R/xina.R",
+    "properties" : {
+        "cursorPosition" : "7,37",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
