@@ -7,7 +7,18 @@ Author: Lee, Lang Ho and Singh, Sasha A.
 Authors@R: c(person("Lang Ho", "Lee", email = "langholee@gmail.com",  role = c("aut", "cre")), person("Sasha", "Singh", email = "sasingh@bwh.harvard.edu",  role = c("aut")))
 Maintainer: Lang Ho Lee <langholee@gmail.com> and Sasha A. Singh <sasingh@bwh.harvard.edu>
 Description: An intuitive R package simplifies network analyses output from multiplexed high-dimensional proteomics/trascriptomics kinetics data.
-Copyright: This software script is protected by the Copyright Act of 1976, 17 U.S.C. §§ 101-810, as amended. Rights reserved. Please contact The Brigham and Women’s Hospital, Inc. for further information.
+Copyright:
+    Copyright (C) <2018>  Lang Ho Lee and Sasha A. Singh
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License any 
+    later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Encoding: UTF-8
 LazyData: true
 License: GPL-3
