@@ -11,7 +11,8 @@ organize_clusters(clustering_dir = getwd(), super_ds, file_out = TRUE)
 
 \item{super_ds}{XINA clusters}
 
-\item{file_out}{If it is TRUE, it writes the aligned clustering informaion to "xina_clusters_aligned.csv" file.}
+\item{file_out}{If it is TRUE, it writes the aligned clustering informaion
+to "xina_clusters_aligned.csv" file.}
 }
 \value{
 Comma-separated file containing aligned XINA clustering results.

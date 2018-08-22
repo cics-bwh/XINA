@@ -12,11 +12,13 @@ make_random_xina_data(n = 500, mtor = TRUE, time_points = c("0hr", "2hr",
 \item{n}{The number of proteins for one condition. Default is 500.}
 
 \item{mtor}{If it is TRUE (default), mTOR pathway genes will be significant.
-If it is FALSE, randomly selected genes will be significant in first three conditions.}
+If it is FALSE, randomly selected genes will be significant
+in first three conditions.}
 
 \item{time_points}{A vector containing time points of the data matrix}
 
-\item{conditions}{A vector containing condition information, for example normal, disease and drug treated disase.}
+\item{conditions}{A vector containing condition information,
+for example normal, disease and drug treated disase.}
 }
 \value{
 Three comma-separated files containing time-series data for XINA
@@ -29,9 +31,12 @@ c("0hr", "2hr", "6hr", "12hr", "24hr", "48hr", "72hr").
 }
 \examples{
 make_random_xina_data()
-g1 <- read.csv("Control.csv", check.names=FALSE, stringsAsFactors = FALSE)
-g2 <- read.csv("Stimulus1.csv", check.names=FALSE, stringsAsFactors = FALSE)
-g3 <- read.csv("Stimulus2.csv", check.names=FALSE, stringsAsFactors = FALSE)
+g1 <- read.csv("Control.csv", check.names=FALSE,
+stringsAsFactors = FALSE)
+g2 <- read.csv("Stimulus1.csv", check.names=FALSE,
+stringsAsFactors = FALSE)
+g3 <- read.csv("Stimulus2.csv", check.names=FALSE,
+stringsAsFactors = FALSE)
 
 head(g1)
 head(g2)

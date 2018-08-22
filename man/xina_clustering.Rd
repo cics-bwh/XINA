@@ -10,21 +10,30 @@ xina_clustering(f_names, data_column, out_dir = getwd(), nClusters = 20,
 \arguments{
 \item{f_names}{A vector containing input file (.csv) paths}
 
-\item{data_column}{A vector containing column names (1st row of the input file) of data matrix}
+\item{data_column}{A vector containing column names
+(1st row of the input file) of data matrix}
 
-\item{out_dir}{A directory path for saving clustering results. (default: out_dir=getwd())}
+\item{out_dir}{A directory path for saving clustering results.
+(default: out_dir=getwd())}
 
 \item{nClusters}{The number of desired maximum clusters}
 
-\item{norm}{Default is "sum_normalization".  Sum-normalization is to divide the data matrix by row sum.
-If you want to know more about sum-normalization, see https://www.ncbi.nlm.nih.gov/pubmed/19861354.
-"zscore" is to calculate Z score for each protein. See \link[base]{scale}.}
+\item{norm}{Default is "sum_normalization".
+Sum-normalization is to divide the data matrix by row sum.
+If you want to know more about sum-normalization,
+see https://www.ncbi.nlm.nih.gov/pubmed/19861354.
+"zscore" is to calculate Z score for each protein.
+See \link[base]{scale}.}
 
-\item{chosen_model}{You can choose a specific model rather than testing all the models that are available in mclust. \link[mclust]{mclustModelNames}
-If you want k-means clustering instead of the model-based clustering, use "kmeans" here.}
+\item{chosen_model}{You can choose a specific model rather than
+testing all the models that are available in mclust.
+\link[mclust]{mclustModelNames}
+If you want k-means clustering instead of the model-based clustering,
+use "kmeans" here.}
 }
 \value{
-a plot containing a BIC plot in current working directory and a list containing below information:
+a plot containing a BIC plot in current working directory
+and a list containing below information:
      \tabular{rl}{
       \strong{Item} \tab \strong{Description}\cr
       clusters \tab XINA clustering results\cr
@@ -36,13 +45,16 @@ a plot containing a BIC plot in current working directory and a list containing 
       chosen_model \tab The used covariance model for model-based clustering\cr
       optimal_BIC \tab BIC of the optimized covariance model\cr
       condition \tab Experimental conditions of the user input data\cr
-      color_for_condition \tab Colors assigned to each experimental conditions which is used for condition composition plot\cr
-      color_for_clusters \tab Colors assigned to each clusters which is used for XINA clustering plot\cr
+      color_for_condition \tab Colors assigned to each experimental conditions
+      which is used for condition composition plot\cr
+      color_for_clusters \tab Colors assigned to each clusters
+      which is used for XINA clustering plot\cr
       norm_method \tab Used normalization method\cr
      }
 }
 \description{
-Clustering multiplexed time-series omics data to find co-abundance profiles
+Clustering multiplexed time-series omics data to
+find co-abundance profiles
 }
 \examples{
 # Generate random multiplexed time-series data
@@ -58,10 +70,12 @@ data_column <- random_data_info$time_points
 set.seed(0)
 
 # Run the model-based clustering to find co-abundance profiles
-example_clusters <- xina_clustering(data_files, data_column=data_column, nClusters=30)
+example_clusters <- xina_clustering(data_files, data_column=data_column,
+nClusters=30)
 
 # Run k-means clustering to find co-abundance profiles
-example_clusters <- xina_clustering(data_files, data_column=data_column, nClusters=30,
+example_clusters <- xina_clustering(data_files, data_column=data_column,
+nClusters=30,
 chosen_model="kmeans")
 
 }

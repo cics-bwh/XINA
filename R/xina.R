@@ -1,12 +1,8 @@
-#################################################################################
-# NOTICE                                                                        #
-# This software script is protected by                                          #
-# the Copyright Act of 1976, 17 U.S.C. $$ 101-810, as amended. Rights reserved. #
-# Please contact The Brigham and Women's Hospital, Inc. for further information.#
-#################################################################################
-# The deveroper and the maintainer: Lang Ho Lee (lhlee@bwh.harvard.edu)         #
-#                                   Sasha A. Singh (sasingh@bwh.harvard.edu)    #
-#################################################################################
+#############################################
+# The deveroper and the maintainer:         #
+#   Lang Ho Lee (lhlee@bwh.harvard.edu)     #
+#   Sasha A. Singh (sasingh@bwh.harvard.edu)#
+#############################################
 
 # Mute warnings
 options(warn=1)
@@ -18,25 +14,32 @@ options(warn=1)
 #' c("0hr", "2hr", "6hr", "12hr", "24hr", "48hr", "72hr").
 #' @param n The number of proteins for one condition. Default is 500.
 #' @param mtor If it is TRUE (default), mTOR pathway genes will be significant.
-#' If it is FALSE, randomly selected genes will be significant in first three conditions.
+#' If it is FALSE, randomly selected genes will be significant
+#' in first three conditions.
 #' @param time_points A vector containing time points of the data matrix
-#' @param conditions A vector containing condition information, for example normal, disease and drug treated disase.
+#' @param conditions A vector containing condition information,
+#' for example normal, disease and drug treated disase.
 #' @return Three comma-separated files containing time-series data for XINA
 #' @import utils
 #' @export
 #' @examples
 #' make_random_xina_data()
-#' g1 <- read.csv("Control.csv", check.names=FALSE, stringsAsFactors = FALSE)
-#' g2 <- read.csv("Stimulus1.csv", check.names=FALSE, stringsAsFactors = FALSE)
-#' g3 <- read.csv("Stimulus2.csv", check.names=FALSE, stringsAsFactors = FALSE)
+#' g1 <- read.csv("Control.csv", check.names=FALSE,
+#' stringsAsFactors = FALSE)
+#' g2 <- read.csv("Stimulus1.csv", check.names=FALSE,
+#' stringsAsFactors = FALSE)
+#' g3 <- read.csv("Stimulus2.csv", check.names=FALSE,
+#' stringsAsFactors = FALSE)
 #'
 #' head(g1)
 #' head(g2)
 #' head(g3)
 #'
 make_random_xina_data <- function(n=500, mtor=TRUE,
-                                  time_points=c("0hr", "2hr", "6hr", "12hr", "24hr", "48hr", "72hr"),
-                                  conditions=c("Control", "Stimulus1", "Stimulus2")) {
+                                  time_points=c("0hr", "2hr", "6hr", "12hr",
+                                                "24hr", "48hr", "72hr"),
+                                  conditions=c("Control", "Stimulus1",
+                                               "Stimulus2")) {
   # gene_info <- gn_desc <- gn <- NULL
   # Get gene names and descriptions
   data("gene_info", envir=environment())
@@ -56,7 +59,8 @@ make_random_xina_data <- function(n=500, mtor=TRUE,
   limit_gn <- length(gn) - nrow_intended
   # Get random data
   if (mtor) {
-    list_data <- get_random_data(time_points, conditions, num_shared+num_unique, percent.sign=0)
+    list_data <- get_random_data(time_points, conditions, num_shared+num_unique,
+                                 percent.sign=0)
   } else {
     list_data <- get_random_data(time_points, conditions, num_shared+num_unique)
   }
@@ -75,10 +79,13 @@ make_random_xina_data <- function(n=500, mtor=TRUE,
       selected_idx <- c(selected_idx, tmp_idx)
     }
     if (mtor) {
-      data_out <- rbind(cbind(Accession=gn[selected_idx], Description=gn_desc[selected_idx], list_data[[i]]),
+      data_out <- rbind(cbind(Accession=gn[selected_idx],
+                              Description=gn_desc[selected_idx],
+                              list_data[[i]]),
                         list_intended_genes[[i]])
     } else {
-      data_out <- cbind(Accession=gn[selected_idx], Description=gn_desc[selected_idx], list_data[[i]])
+      data_out <- cbind(Accession=gn[selected_idx],
+                        Description=gn_desc[selected_idx], list_data[[i]])
     }
     write.csv(data_out, paste(conditions[i],".csv",sep=''), row.names = FALSE)
   }
@@ -88,10 +95,13 @@ make_random_xina_data <- function(n=500, mtor=TRUE,
 #' @title get_random_data
 #' @description Get randomized time-series data
 #' @param time_points A vector containing time points of the data matrix
-#' @param conditions A vector containing condition information, for example normal, disease and drug treated disase.
+#' @param conditions A vector containing condition information,
+#' for example normal, disease and drug treated disase.
 #' @param num_total The number of total proteins to be generated
-#' @param percent.sign Percentage of differentially expressed proteins. Ignored when equal=FALSE.
-#' @param equal If equal is TRUE, all the conditions will have numbers between 0 and 1.
+#' @param percent.sign Percentage of differentially expressed proteins.
+#' Ignored when equal=FALSE.
+#' @param equal If equal is TRUE, all the conditions will have numbers
+#' between 0 and 1.
 #' If it is  FALSE, the first three conditions will have different ranges.
 #' First condition will have numbers from 0.3 to 0.4.
 #' Second condition will have numbers from 0.6 to 0.8.
@@ -99,9 +109,11 @@ make_random_xina_data <- function(n=500, mtor=TRUE,
 #' Other conditions will have numbers from 0 to 1.
 #' @return A list containing ramdomly generated data matrix
 #'
-get_random_data <- function(time_points, conditions, num_total, percent.sign=0.1, equal=TRUE){
+get_random_data <- function(time_points, conditions, num_total,
+                            percent.sign=0.1, equal=TRUE){
   if (equal) {
-    significant_idx <- sample(x=seq_len(num_total), size=round(num_total*percent.sign))
+    significant_idx <- sample(x=seq_len(num_total),
+                              size=round(num_total*percent.sign))
   } else {
     significant_idx <- seq_len(num_total)
   }
@@ -112,13 +124,17 @@ get_random_data <- function(time_points, conditions, num_total, percent.sign=0.1
         expression_profile <- c(0.5, stats::runif(length(time_points)-1))
       } else {
         if (j==1) {
-          expression_profile <- c(0.5, stats::runif(length(time_points)-1,0.3,0.4))
+          expression_profile <-
+            c(0.5, stats::runif(length(time_points)-1,0.3,0.4))
         } else if (j==2) {
-          expression_profile <- c(0.5, stats::runif(length(time_points)-1,0.6,0.8))
+          expression_profile <-
+            c(0.5, stats::runif(length(time_points)-1,0.6,0.8))
         } else if (j==3) {
-          expression_profile <- c(0.5, stats::runif(length(time_points)-1,0.3,0.5))
+          expression_profile <-
+            c(0.5, stats::runif(length(time_points)-1,0.3,0.5))
         } else {
-          expression_profile <- c(0.5, stats::runif(length(time_points)-1))
+          expression_profile <-
+            c(0.5, stats::runif(length(time_points)-1))
         }
       }
       names(expression_profile) <- time_points
@@ -138,7 +154,8 @@ get_random_data <- function(time_points, conditions, num_total, percent.sign=0.1
 #' @title get_mTOR_proteins
 #' @description Get mTOR pathway genes
 #' @param time_points A vector containing time points of the data matrix
-#' @param conditions A vector containing condition information, for example normal, disease and drug treated disase.
+#' @param conditions A vector containing condition information,
+#' for example normal, disease and drug treated disase.
 #' @import utils
 #' @return A vector containing mTOR pathway gene names
 get_mTOR_proteins <- function(time_points, conditions) {
@@ -156,10 +173,12 @@ get_mTOR_proteins <- function(time_points, conditions) {
                "RPS6KB2", "RPTOR","RRAGA","RRAGB","RRAGC","RRAGD","RYBP",
                "STK11","STRADA", "TNF","TSC1","TSC2","ULK1","ULK2","VEGFA")
   mtor_desc <- gn_desc[match(mtor_gn, gn)]
-  list_data <- get_random_data(time_points, conditions, length(mtor_gn), equal=FALSE)
+  list_data <- get_random_data(time_points, conditions, length(mtor_gn),
+                               equal=FALSE)
   list_return <- list()
   for (i in seq_len(length(conditions))) {
-    list_return[[i]] <- cbind(Accession=mtor_gn, Description=mtor_desc, list_data[[i]])
+    list_return[[i]] <- cbind(Accession=mtor_gn, Description=mtor_desc,
+                              list_data[[i]])
   }
   return(list_return)
 }
@@ -169,7 +188,8 @@ get_mTOR_proteins <- function(time_points, conditions) {
 #' @param col_head_of_clustering Column names of XINA clustering result
 #' @return A vector containing column names of  data matrix
 extract_data_column <- function(col_head_of_clustering){
-  cluster_info_head <-c("Accession", "Description", "Condition", "Key", "Cluster")
+  cluster_info_head <-c("Accession", "Description", "Condition",
+                        "Key", "Cluster")
   data_column <- c()
   for (col_head in col_head_of_clustering){
     if (is.na(match(col_head, cluster_info_head))){
@@ -200,7 +220,8 @@ load_previous_results <- function(clustering_dir=getwd(), data_column=NULL,
                                   fp_clusters="xina_clusters.csv") {
   # Retrieve clustering results
   file_clusters <- paste(clustering_dir, "/", fp_clusters, sep='')
-  df_clusters <- read.csv(file_clusters, check.names=FALSE, stringsAsFactors = FALSE)
+  df_clusters <- read.csv(file_clusters, check.names=FALSE,
+                          stringsAsFactors = FALSE)
   df_aligned <- organize_clusters(clustering_dir, df_clusters, file_out=FALSE)
   if (is.null(data_column)) {
     data_column <- extract_data_column(colnames(df_clusters))
@@ -233,7 +254,8 @@ load_previous_results <- function(clustering_dir=getwd(), data_column=NULL,
 #' @description Organize XINA clustering information by gene name
 #' @param clustering_dir The directory path of XINA clustering results
 #' @param super_ds XINA clusters
-#' @param file_out If it is TRUE, it writes the aligned clustering informaion to "xina_clusters_aligned.csv" file.
+#' @param file_out If it is TRUE, it writes the aligned clustering informaion
+#' to "xina_clusters_aligned.csv" file.
 #' @import utils
 #' @return Comma-separated file containing aligned XINA clustering results.
 organize_clusters <- function(clustering_dir=getwd(), super_ds, file_out=TRUE)
@@ -258,8 +280,10 @@ organize_clusters <- function(clustering_dir=getwd(), super_ds, file_out=TRUE)
       }
       clusters <- c(clusters, cluster_number)
     }
-    tmp <- c(as.character(ds_gene$Accession[1]), as.character(ds_gene$Description[1]), clusters)
-    df_cluster <- rbind(df_cluster, data.frame(t(tmp), stringsAsFactors = FALSE))
+    tmp <- c(as.character(ds_gene$Accession[1]),
+             as.character(ds_gene$Description[1]), clusters)
+    df_cluster <- rbind(df_cluster, data.frame(t(tmp),
+                                               stringsAsFactors = FALSE))
   }
   colnames(df_cluster) <- c("Gene name", "Description", as.vector(conditions))
   if (file_out) {
@@ -269,17 +293,27 @@ organize_clusters <- function(clustering_dir=getwd(), super_ds, file_out=TRUE)
 }
 
 #' @title xina_clustering
-#' @description Clustering multiplexed time-series omics data to find co-abundance profiles
+#' @description Clustering multiplexed time-series omics data to
+#' find co-abundance profiles
 #' @param f_names A vector containing input file (.csv) paths
-#' @param data_column A vector containing column names (1st row of the input file) of data matrix
-#' @param out_dir A directory path for saving clustering results. (default: out_dir=getwd())
+#' @param data_column A vector containing column names
+#' (1st row of the input file) of data matrix
+#' @param out_dir A directory path for saving clustering results.
+#' (default: out_dir=getwd())
 #' @param nClusters The number of desired maximum clusters
-#' @param chosen_model You can choose a specific model rather than testing all the models that are available in mclust. \link[mclust]{mclustModelNames}
-#' If you want k-means clustering instead of the model-based clustering, use "kmeans" here.
-#' @param norm Default is "sum_normalization".  Sum-normalization is to divide the data matrix by row sum.
-#' If you want to know more about sum-normalization, see https://www.ncbi.nlm.nih.gov/pubmed/19861354.
-#' "zscore" is to calculate Z score for each protein. See \link[base]{scale}.
-#' @return a plot containing a BIC plot in current working directory and a list containing below information:
+#' @param chosen_model You can choose a specific model rather than
+#' testing all the models that are available in mclust.
+#' \link[mclust]{mclustModelNames}
+#' If you want k-means clustering instead of the model-based clustering,
+#' use "kmeans" here.
+#' @param norm Default is "sum_normalization".
+#' Sum-normalization is to divide the data matrix by row sum.
+#' If you want to know more about sum-normalization,
+#' see https://www.ncbi.nlm.nih.gov/pubmed/19861354.
+#' "zscore" is to calculate Z score for each protein.
+#' See \link[base]{scale}.
+#' @return a plot containing a BIC plot in current working directory
+#' and a list containing below information:
 #'      \tabular{rl}{
 #'       \strong{Item} \tab \strong{Description}\cr
 #'       clusters \tab XINA clustering results\cr
@@ -291,8 +325,10 @@ organize_clusters <- function(clustering_dir=getwd(), super_ds, file_out=TRUE)
 #'       chosen_model \tab The used covariance model for model-based clustering\cr
 #'       optimal_BIC \tab BIC of the optimized covariance model\cr
 #'       condition \tab Experimental conditions of the user input data\cr
-#'       color_for_condition \tab Colors assigned to each experimental conditions which is used for condition composition plot\cr
-#'       color_for_clusters \tab Colors assigned to each clusters which is used for XINA clustering plot\cr
+#'       color_for_condition \tab Colors assigned to each experimental conditions
+#'       which is used for condition composition plot\cr
+#'       color_for_clusters \tab Colors assigned to each clusters
+#'       which is used for XINA clustering plot\cr
 #'       norm_method \tab Used normalization method\cr
 #'      }
 #' @import mclust
@@ -312,10 +348,12 @@ organize_clusters <- function(clustering_dir=getwd(), super_ds, file_out=TRUE)
 #' set.seed(0)
 #'
 #' # Run the model-based clustering to find co-abundance profiles
-#' example_clusters <- xina_clustering(data_files, data_column=data_column, nClusters=30)
+#' example_clusters <- xina_clustering(data_files, data_column=data_column,
+#' nClusters=30)
 #'
 #' # Run k-means clustering to find co-abundance profiles
-#' example_clusters <- xina_clustering(data_files, data_column=data_column, nClusters=30,
+#' example_clusters <- xina_clustering(data_files, data_column=data_column,
+#' nClusters=30,
 #' chosen_model="kmeans")
 #'
 xina_clustering <- function(f_names, data_column, out_dir=getwd(), nClusters=20,
@@ -393,12 +431,15 @@ xina_clustering <- function(f_names, data_column, out_dir=getwd(), nClusters=20,
 #' @param f_names A vector of .csv file paths containing kinetics data
 #' @param data_column A vector of column names containing data matrix
 #' @param delim The delimiter of input file (default is ',')
-#' @param norm The normalization method. It should be one of c('sum_normalization', 'zscore').
+#' @param norm The normalization method. It should be one of
+#' c('sum_normalization', 'zscore').
 #' Default is 'sum_normalization'.
 #' @import tools
 #' @import utils
-#' @return A data frame containing kinetics data obtained from files in the f_names vector
-generate_superset <- function(f_names, data_column, delim=",", norm="sum_normalization")
+#' @return A data frame containing kinetics data obtained from files
+#' in the f_names vector
+generate_superset <- function(f_names, data_column, delim=",",
+                              norm="sum_normalization")
 {
   SuperDS <- data.frame()
   for (i in seq_len(length(f_names)))
@@ -407,10 +448,12 @@ generate_superset <- function(f_names, data_column, delim=",", norm="sum_normali
     condition <- file_path_sans_ext(f_name)
     df_csv <- read.csv(file=f_name, check.names=FALSE, sep=delim)
     if (is.na(match("Accession",colnames(df_csv)))){
-      stop(paste("Your input file named '",f_name,"' doesn't have 'Accession' column"))
+      stop(paste("Your input file named '",f_name,
+                 "' doesn't have 'Accession' column"))
     }
     if (is.na(match("Description",colnames(df_csv)))){
-      stop(paste("Your input file named '",f_name,"' doesn't have 'Description' column"))
+      stop(paste("Your input file named '",f_name,
+                 "' doesn't have 'Description' column"))
     }
     # remove zero-sum rows
     df_filtered <- subset(df_csv, rowSums(df_csv[data_column])>0)
@@ -419,8 +462,10 @@ generate_superset <- function(f_names, data_column, delim=",", norm="sum_normali
     # normalize the data matrix
     if (norm=="sum_normalization") {
       # Sum-normalization
-      df_normalized <- cbind(df_filtered[data_column] / as.matrix(rowSums(df_filtered[data_column])),
-                             Accession=df_filtered$Accession, Description=df_filtered$Description, Condition=condition)
+      df_normalized <- cbind(df_filtered[data_column] /
+                               as.matrix(rowSums(df_filtered[data_column])),
+                             Accession=df_filtered$Accession,
+                             Description=df_filtered$Description, Condition=condition)
     } else if (norm=="zscore") {
       # Z-score
       df_normalized <- data.frame()
@@ -1988,6 +2033,7 @@ xina_enrichment <- function(string_db, protein_list, enrichment_type="GO",
 #' @import graphics
 #' @export
 #' @examples
+#' \dontrun{
 #' # load XINA example data
 #' data(xina_example)
 #'
@@ -2005,6 +2051,7 @@ xina_enrichment <- function(string_db, protein_list, enrichment_type="GO",
 #' net_all <- simplify(graph_from_data_frame(d=hprd_ppi, directed=FALSE),
 #' remove.multiple = FALSE, remove.loops = TRUE)
 #' xina_result <- xina_analysis(example_clusters, net_all, is_stringdb=FALSE, flag_simplify=FALSE)
+#' }
 #'
 xina_analysis <- function(clustering_result, ppi_db, is_stringdb=TRUE, flag_simplify=TRUE,
                           node_shape="sphere", num_clusters_in_row=5, img_size=NULL, img_qual=300) {
@@ -2029,7 +2076,8 @@ xina_analysis <- function(clustering_result, ppi_db, is_stringdb=TRUE, flag_simp
   # analyze STRINGdb
   if (is_stringdb){
     superset_string <- ppi_db$map(super_ds, "Accession")
-    colnames(superset_string) <- c("Accession", data_column, "Description", "Condition",
+    colnames(superset_string) <- c("Accession", data_column,
+                                   "Description", "Condition",
                                    "Key", "Cluster", "STRING_id")
     net_stringDB <- ppi_db$graph
     vertices <- as.vector(V(net_stringDB)$name)
@@ -2093,7 +2141,8 @@ xina_analysis <- function(clustering_result, ppi_db, is_stringdb=TRUE, flag_simp
         node_condition <- c()
         for (k in seq_len(length(nodes_subnet))) {
           p <- as.vector(nodes_subnet[k])
-          node_condition <- c(node_condition, as.character(conditions[match(p, prots)]))
+          node_condition <- c(node_condition,
+                              as.character(conditions[match(p, prots)]))
         }
         # node list
         list_nodes[[i]] <- nodes_subnet
@@ -2109,7 +2158,9 @@ xina_analysis <- function(clustering_result, ppi_db, is_stringdb=TRUE, flag_simp
         V(subnet)$condition <- node_condition
         vertex_color <- c()
         for (j in seq_len(length(node_condition))) {
-          vertex_color <- c(vertex_color, color_for_nodes[match(node_condition[j], uniq_condition)])
+          vertex_color <- c(vertex_color,
+                            color_for_nodes[match(node_condition[j],
+                                                  uniq_condition)])
         }
         E(subnet)$edge.color <- edge_color
         V(subnet)$vertex.color <- vertex_color
@@ -2127,6 +2178,13 @@ xina_analysis <- function(clustering_result, ppi_db, is_stringdb=TRUE, flag_simp
     }
   }
   dev.off()
-  return(list(All_network=net_all, Sub_network=list_subnets, Data=superset_string, num_clusters_in_row=num_clusters_in_row,
-              Nodes=list_nodes, Conditions=list_conditions, Titles=titles, out_dir=na_dir, is_stringdb=is_stringdb))
+  return(list(All_network=net_all,
+              Sub_network=list_subnets,
+              Data=superset_string,
+              num_clusters_in_row=num_clusters_in_row,
+              Nodes=list_nodes,
+              Conditions=list_conditions,
+              Titles=titles,
+              out_dir=na_dir,
+              is_stringdb=is_stringdb))
 }

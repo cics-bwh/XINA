@@ -10,13 +10,16 @@ get_random_data(time_points, conditions, num_total, percent.sign = 0.1,
 \arguments{
 \item{time_points}{A vector containing time points of the data matrix}
 
-\item{conditions}{A vector containing condition information, for example normal, disease and drug treated disase.}
+\item{conditions}{A vector containing condition information,
+for example normal, disease and drug treated disase.}
 
 \item{num_total}{The number of total proteins to be generated}
 
-\item{percent.sign}{Percentage of differentially expressed proteins. Ignored when equal=FALSE.}
+\item{percent.sign}{Percentage of differentially expressed proteins.
+Ignored when equal=FALSE.}
 
-\item{equal}{If equal is TRUE, all the conditions will have numbers between 0 and 1.
+\item{equal}{If equal is TRUE, all the conditions will have numbers
+between 0 and 1.
 If it is  FALSE, the first three conditions will have different ranges.
 First condition will have numbers from 0.3 to 0.4.
 Second condition will have numbers from 0.6 to 0.8.

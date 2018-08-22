@@ -9,7 +9,8 @@ get_mTOR_proteins(time_points, conditions)
 \arguments{
 \item{time_points}{A vector containing time points of the data matrix}
 
-\item{conditions}{A vector containing condition information, for example normal, disease and drug treated disase.}
+\item{conditions}{A vector containing condition information,
+for example normal, disease and drug treated disase.}
 }
 \value{
 A vector containing mTOR pathway gene names

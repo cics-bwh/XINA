@@ -15,7 +15,8 @@ XINA
   \item Sub_network. A list containing PPI networks of each clusters
   \item Data. XINA clustering results. See \link[XINA]{xina_clustering}
   \item Nodes. A list of proteins in each cluster
-  \item Conditions. A list of experimental condition of proteins in each cluster
+  \item Conditions. A list of experimental condition of proteins
+  in each cluster
   \item Titles.  A list of plot titles for XINA plotting
   \item out_dir. A directory path storing XINA network analysis results
   \item is_stringdb. False = different PPI DB and TRUE = STRING DB

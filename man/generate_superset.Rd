@@ -14,11 +14,13 @@ generate_superset(f_names, data_column, delim = ",",
 
 \item{delim}{The delimiter of input file (default is ',')}
 
-\item{norm}{The normalization method. It should be one of c('sum_normalization', 'zscore').
+\item{norm}{The normalization method. It should be one of
+c('sum_normalization', 'zscore').
 Default is 'sum_normalization'.}
 }
 \value{
-A data frame containing kinetics data obtained from files in the f_names vector
+A data frame containing kinetics data obtained from files
+in the f_names vector
 }
 \description{
 Merge input kinetics files

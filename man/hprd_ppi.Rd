@@ -11,8 +11,11 @@ hprd_ppi}
 }
 \description{
 \itemize{
-  \item gene_symbol_1. Gene name interacting with gene name in 'gene_symbol_2'
-  \item gene_symbol_2. Gene name interacting with gene name in 'gene_symbol_1'
-  \item Experiment_type. Experimental or computational methods supporting the interaction
+  \item gene_symbol_1. Gene name interacting with gene name
+  in 'gene_symbol_2'
+  \item gene_symbol_2. Gene name interacting with gene name
+  in 'gene_symbol_1'
+  \item Experiment_type. Experimental or computational methods
+  supporting the interaction
 }
 }

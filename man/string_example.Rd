@@ -2,7 +2,8 @@
 % Please edit documentation in R/data.R
 \name{string_example}
 \alias{string_example}
-\title{Protein-protein interaction resource downloaded from STRING DB for XINA's example dataset
+\title{Protein-protein interaction resource downloaded from STRING DB
+for XINA's example dataset
 A data frame containing protein-protein interactions
 string_example}
 \format{A data frame containing STRING protein-protein interaction data}
@@ -11,8 +12,10 @@ string_example}
 }
 \description{
 \itemize{
-  \item gene_symbol_1. Gene name interacting with gene name in 'gene_symbol_2'
-  \item gene_symbol_2. Gene name interacting with gene name in 'gene_symbol_1'
+  \item gene_symbol_1. Gene name interacting with gene name
+  in 'gene_symbol_2'
+  \item gene_symbol_2. Gene name interacting with gene name
+  in 'gene_symbol_1'
   \item PPI_Source. Data original source
 }
 }
