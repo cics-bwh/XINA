@@ -1,7 +1,7 @@
 # XINA
 XINA: a workflow for the integration of multiplexed proteomics kinetics data with network analysis
 
-### 0. Authors and Maintainers
+### 0. Authors and maintainers
 Lee, Lang Ho, Ph.D.   <lhlee@bwh.harvard.edu>
 
 Singh, Sasha A.,Ph.D. <sasingh@bwh.harvard.edu>
