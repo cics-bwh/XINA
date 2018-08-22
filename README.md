@@ -409,12 +409,18 @@ plot_enrichment_results(go_enriched$Process, num_terms=20)
 plot_enrichment_results(go_enriched$Function, num_terms=20)
 plot_enrichment_results(go_enriched$Component, num_terms=20)
 ```
-### 6. Authors and maintainers
+### 6. Authors
 Lee, Lang Ho, Ph.D.   <lhlee@bwh.harvard.edu>
 
 Singh, Sasha A.,Ph.D. <sasingh@bwh.harvard.edu>
 
-### 7. Copyright and license
+### 7. Maintainers
+Lee, Lang Ho, Ph.D.   <lhlee@bwh.harvard.edu>
+
+Singh, Sasha A.,Ph.D. <sasingh@bwh.harvard.edu>
+
+
+### 8. Copyright and license
 Copyright (C) <2018>  Lang Ho Lee and Sasha A. Singh
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
