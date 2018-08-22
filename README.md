@@ -414,10 +414,7 @@ Lee, Lang Ho, Ph.D.   <lhlee@bwh.harvard.edu>
 
 Singh, Sasha A.,Ph.D. <sasingh@bwh.harvard.edu>
 
-### 7. License
-GPL-3
-
-### 8. Copyright
+### 7. Copyright and license
 Copyright (C) <2018>  Lang Ho Lee and Sasha A. Singh
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
