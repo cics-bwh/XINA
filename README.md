@@ -1,11 +1,6 @@
 # XINA
 XINA: a workflow for the integration of multiplexed proteomics kinetics data with network analysis
 
-### 0. Authors and maintainers
-Lee, Lang Ho, Ph.D.   <lhlee@bwh.harvard.edu>
-
-Singh, Sasha A.,Ph.D. <sasingh@bwh.harvard.edu>
-
 ### 1. Introduction
 The use of network medicine tools to view broad biological systems has become the standard in the field, replacing reductionist, one-protein-one-pathway concepts.  Quantitative proteomics experiments provide large amounts of information with great potential for network analyses. Moreover, tandem mass tagging approaches are conducive to kinetics-based studies that can include more than one stimulation condition, producing multiple kinetics datasets to be compared for subsequent network analyses. Despite the growing need to integrate network approaches, however, few practical bioinformatics tools are available to do so.  To address this disconnect, we developed a high-dimensional data analysis strategy and accompanying software that multiplexes isobaric mass tagged-based kinetics data for network analysis (XINA) with the aim to identify coregulated protein networks. 
 
@@ -414,3 +409,10 @@ plot_enrichment_results(go_enriched$Process, num_terms=20)
 plot_enrichment_results(go_enriched$Function, num_terms=20)
 plot_enrichment_results(go_enriched$Component, num_terms=20)
 ```
+### 6. Authors and maintainers
+Lee, Lang Ho, Ph.D.   <lhlee@bwh.harvard.edu>
+
+Singh, Sasha A.,Ph.D. <sasingh@bwh.harvard.edu>
+
+### 7. License
+GPL-3
