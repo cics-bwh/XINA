@@ -8,17 +8,20 @@ Authors@R: c(person("Lang Ho", "Lee", email = "langholee@gmail.com",  role = c("
 Maintainer: Lang Ho Lee <langholee@gmail.com> and Sasha A. Singh <sasingh@bwh.harvard.edu>
 Description: An intuitive R package simplifies network analyses output from multiplexed high-dimensional proteomics/trascriptomics kinetics data.
 Copyright:
-    Copyright (C) <2018>  Lang Ho Lee and Sasha A. Singh
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License any 
-    later version.
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    XINA combines multiple quantitative (kinetics) datasets from omics studies into a single input dataset for clustering.
+    Copyright(C)2018 Lang Ho Lee, Arda Halu, Stephanie Morgan, Hiroshi Iwata, Masanori Aikawa, and Sasha A. Singh
+    This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, any later version.
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    - Contact emails:
+    L. Lee, LHLEE@BWH.HARVARD.EDU 
+    S. Singh, SASINGH@BWH.HARVARD.EDU  
+    M. Aikawa, MAIKAWA@BWH.HARVARD.EDU 
+    - Mailing address: 
+    Department of Medicine, Cardiovascular Division
+    Center for Interdisciplinary Cardiovascular Sciences
+    3 Blackfan Street, 17th Floor
+    Boston, MA 02115
+    USA
 Encoding: UTF-8
 LazyData: true
 License: GPL-3
