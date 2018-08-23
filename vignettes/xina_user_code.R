@@ -2,7 +2,9 @@
 knitr::opts_chunk$set(echo = TRUE)
 
 ## ----installation--------------------------------------------------------
-# Go to https://cics.bwh.harvard.edu/software and download XINA
+# Download XINA from either two websites and install it
+# https://cics.bwh.harvard.edu/software
+# https://github.com/langholee/XINA/
 
 ## ----import libraries----------------------------------------------------
 library(XINA)
@@ -59,7 +61,7 @@ clustering_result <- xina_clustering(data_files, data_column=data_column, nClust
 clustering_result_km <- xina_clustering(data_files, data_column=data_column, nClusters=30, chosen_model='kmeans')
 
 ## ----load previous data--------------------------------------------------
-clustering_result_reloaded <- load_previous_results()
+clustering_result_reloaded <- load_previous_results(".")
 head(clustering_result_reloaded$aligned)
 
 ## ----load xina_example---------------------------------------------------
@@ -167,15 +169,15 @@ string_db
 ## ----XINA analysis with STRING DB----------------------------------------
 xina_result <- xina_analysis(example_clusters, string_db)
 
-## ----HPRD PPI network, eval=FALSE----------------------------------------
-#  # Construct HPRD PPI network
-#  data(HPRD)
-#  ppi_db_hprd <- simplify(graph_from_data_frame(d=hprd_ppi, directed=FALSE), remove.multiple = FALSE, remove.loops = TRUE)
-#  head(hprd_ppi)
+## ----HPRD PPI network----------------------------------------------------
+# Construct HPRD PPI network
+data(HPRD)
+ppi_db_hprd <- simplify(graph_from_data_frame(d=hprd_ppi, directed=FALSE), remove.multiple = FALSE, remove.loops = TRUE)
+head(hprd_ppi)
 
-## ----XINA analysis with HPRD, eval=FALSE---------------------------------
-#  # Run XINA with HPRD protein-protein interaction database
-#  xina_result_hprd <- xina_analysis(example_clusters, ppi_db_hprd, is_stringdb=FALSE)
+## ----XINA analysis with HPRD---------------------------------------------
+# Run XINA with HPRD protein-protein interaction database
+xina_result_hprd <- xina_analysis(example_clusters, ppi_db_hprd, is_stringdb=FALSE)
 
 ## ----plotting PPI networks of all the clusters, eval=FALSE---------------
 #  # XINA network plots labeled gene names

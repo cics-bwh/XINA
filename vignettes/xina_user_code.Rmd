@@ -1,4 +1,4 @@
----
+------
 title: "XINA: a workflow for the integration of multiplexed proteomics kinetics data with network analysis"
 output: rmarkdown::html_vignette
 vignette: >
@@ -17,9 +17,13 @@ The use of network medicine tools to view broad biological systems has become th
 ### 2. XINA references
 https://cics.bwh.harvard.edu/software
 
+https://github.com/langholee/XINA/
+
 ### 3. XINA installation
 ```{r installation}
-# Go to https://cics.bwh.harvard.edu/software and download XINA
+# Download XINA from either two websites and install it
+# https://cics.bwh.harvard.edu/software
+# https://github.com/langholee/XINA/
 ```
 
 To follow this tutorial, you need these libraries. If you don't have the packages below, please install them.
@@ -65,7 +69,7 @@ head(Control[random_data_info$time_points])
 ### 5. Package features
 XINA is an R package and can examine, but is not limited to, time-series omics data from multiple experiment conditions. It has three modules: 1. Model-based clustering analysis, 2. coregulation analysis, and 3. Protein-protein interaction network analysis (we used STRING DB for this practice).
 
-#### 5.1 Model-based clustering analysis
+#### 5.1 Clustering analysis using model-based clustering or k-means clustering algorithm
 XINA implements model-based clustering to classify features (genes or proteins) depending on their expression profiles.  The model-based clustering optimizes the number of clusters at minimum Bayesian information criteria (BIC). Model-based clustering is fulfilled by the 'mclust' R package [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5096736/], which was used by our previously developed tool mIMT-visHTS [https://www.ncbi.nlm.nih.gov/pubmed/26232111]. By default, XINA performs sum-normalization for each gene/protein time-series profile [https://www.ncbi.nlm.nih.gov/pubmed/19861354]. This step is done to standardize all datasets. Most importantly, XINA assigns an electronic tag to each dataset's proteins (similar to TMT) in order to combine the multiple datasets (Super dataset) for subsequent clustering. 
 
 XINA uses the 'mclust' package for the model-based clustering. 'mclust' requires the fixed random seed to get reproducible clustering results. 
@@ -103,7 +107,7 @@ clustering_result_km <- xina_clustering(data_files, data_column=data_column, nCl
 
 The clustering results are stored in your working directory.  XINA clustering generates the mclust BIC plot containing the BIC of each covariance matrix ifor each number of clusters. 'xina_clusters.csv' has a long list of XINA cluster results. 'xina_clusters_aligned.csv' has clustering results arranged by gene name. If you want to recall previous clustering results, you can use 'load_previous_results'
 ```{r load previous data}
-clustering_result_reloaded <- load_previous_results()
+clustering_result_reloaded <- load_previous_results(".")
 head(clustering_result_reloaded$aligned)
 ```
 
@@ -183,7 +187,7 @@ plot_clusters(example_clusters, xval=c(0,2,6,12,24,48,72), xylab=FALSE)
 ```
 
 #### 5.2 coregulation analysis
-XINA supposes that proteins that comigrate between clusters in response to a given condition are more likely to be coregulated at the biological level than other proteins within the same clusters.  For this module, at least two datasets to be compared are needed. XINA supposes features assigned to the same cluster in an experiment condition as a coregulated group.  XINA traces the comigrated proteins in different experiment conditions and finds signficant trends by 1) the number of member features (proteins) and 2) the enrichment test using the Fisher's exact test.  The comigrations are displayed via an alluvial plot. In XINA the comigration is defined as a condition of proteins that show the same expression pattern, classified and evaluated by XINA clustering, in at least two dataset conditions.  If there are proteins that are assigned to the same cluster in more than two datasets, XINA considers those proteins to be comigrated. XINA's 'alluvial_enriched' is designed to find these comigrations and draws alluvial plots for visualizing the found comigrations.
+XINA supposes that proteins that comigrate between clusters in response to a given condition are more likely to be coregulated at the biological level than other proteins within the same clusters.  For this module, at least two datasets to be compared are needed. XINA supposes features assigned to the same cluster in an experiment condition as a coregulated group.  XINA traces the comigrated proteins in different experiment conditions and finds signficant trends by 1) the number of member features (proteins) and 2) the enrichment test using the Fishers exact test.  The comigrations are displayed via an alluvial plot. In XINA the comigration is defined as a condition of proteins that show the same expression pattern, classified and evaluated by XINA clustering, in at least two dataset conditions.  If there are proteins that are assigned to the same cluster in more than two datasets, XINA considers those proteins to be comigrated. XINA's 'alluvial_enriched' is designed to find these comigrations and draws alluvial plots for visualizing the found comigrations.
 ```{r XINA comigration search}
 classes <- as.vector(example_clusters$condition)
 classes
@@ -227,12 +231,12 @@ nrow(proteins_found_in_condition_biased_clusters)
 head(proteins_found_in_condition_biased_clusters)
 ```
 
-If you compare only two conditions, you can apply Fisher's exact test to measure how significantly any given comigration condition is with respect to all in the comparison. The following 2x2 table was used to calculate the p-value from the Fisher's exact test.
+If you compare only two conditions, you can apply Fishers exact test to measure how significantly any given comigration condition is with respect to all in the comparison. The following 2x2 table was used to calculate the p-value from the Fisher's exact test.
 To evaluate significance of comigrated proteins from cluster #1 in control to cluster #2 in a test condition,
 
-                           | cluster #1 in control  |    other clusters in control
+                           | cluster 1 in control  |    other clusters in control
     -----------------------|------------------------|------------------------------
-    cluster #2 in test     | 65 (TP)                |    175 (FP)
+    cluster 2 in test     | 65 (TP)                |    175 (FP)
     other clusters in test | 35 (FN)                |    1079 (TN)
 
 ```{r comigrations with comigration size and significance filters}
