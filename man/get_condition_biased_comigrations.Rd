@@ -6,8 +6,8 @@
 \usage{
 get_condition_biased_comigrations(clustering_result, count_table = NULL,
   selected_conditions, condition_composition, threshold_percent = 50,
-  color_for_null = "gray", color_for_highly_matched = "red4", cex = 0.7,
-  alpha = 0.3)
+  color_for_null = "gray", color_for_highly_matched = "red4",
+  cex = 0.7, alpha = 0.3)
 }
 \arguments{
 \item{clustering_result}{A list containing XINA clustering results.

@@ -1,10 +1,11 @@
 ## ----setup, include=FALSE------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
 
-## ----installation--------------------------------------------------------
-# Download XINA from either two websites and install it
-# https://cics.bwh.harvard.edu/software
-# https://github.com/langholee/XINA/
+## ----installation, eval=FALSE--------------------------------------------
+#  # XINA requires R >= 3.5.1
+#  install.packages('devtools')
+#  library('devtools')
+#  install_github('langholee/XINA')
 
 ## ----import libraries----------------------------------------------------
 library(XINA)
@@ -165,6 +166,15 @@ head(Control_Stimulus1_significant)
 ## ----STRING DB set up----------------------------------------------------
 string_db <- STRINGdb$new( version="10", species=9606, score_threshold=0, input_directory="" )
 string_db
+
+## ----select PPI confidence level of STRING DB, eval=FALSE----------------
+#  get.edge.attribute(sub_graph)$combined_score
+#  
+#  # Medium confidence PPIs only
+#  string_db_med_confidence <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=400), delete.vertices = TRUE)
+#  
+#  # High confidence PPIs only
+#  string_db_high_confidence <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=700), delete.vertices = TRUE)
 
 ## ----XINA analysis with STRING DB----------------------------------------
 xina_result <- xina_analysis(example_clusters, string_db)

@@ -4,8 +4,8 @@
 \alias{xina_clustering}
 \title{xina_clustering}
 \usage{
-xina_clustering(f_names, data_column, out_dir = getwd(), nClusters = 20,
-  norm = "sum_normalization", chosen_model = "")
+xina_clustering(f_names, data_column, out_dir = getwd(),
+  nClusters = 20, norm = "sum_normalization", chosen_model = "")
 }
 \arguments{
 \item{f_names}{A vector containing input file (.csv) paths}

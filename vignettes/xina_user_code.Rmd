@@ -20,10 +20,11 @@ https://cics.bwh.harvard.edu/software
 https://github.com/langholee/XINA/
 
 ### 3. XINA installation
-```{r installation}
-# Download XINA from either two websites and install it
-# https://cics.bwh.harvard.edu/software
-# https://github.com/langholee/XINA/
+```{r installation, eval=FALSE}
+# XINA requires R >= 3.5.1
+install.packages('devtools')
+library('devtools')
+install_github('langholee/XINA')
 ```
 
 To follow this tutorial, you need these libraries. If you don't have the packages below, please install them.
@@ -251,6 +252,17 @@ XINA's example dataset is from human gene names, so download human PPI database 
 ```{r STRING DB set up}
 string_db <- STRINGdb$new( version="10", species=9606, score_threshold=0, input_directory="" )
 string_db
+```
+
+STRING DB provides PPI confidence score so that users can adjust to get more convincing or more comprehensive PPI networks. 
+```{r select PPI confidence level of STRING DB, eval=FALSE}
+get.edge.attribute(sub_graph)$combined_score
+
+# Medium confidence PPIs only
+string_db_med_confidence <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=400), delete.vertices = TRUE)
+
+# High confidence PPIs only
+string_db_high_confidence <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=700), delete.vertices = TRUE)
 ```
 
 When you run XINA network analysis, you need XINA clustering results and STRING db object. 

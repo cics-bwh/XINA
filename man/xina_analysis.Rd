@@ -5,8 +5,8 @@
 \title{xina_analysis}
 \usage{
 xina_analysis(clustering_result, ppi_db, is_stringdb = TRUE,
-  flag_simplify = TRUE, node_shape = "sphere", num_clusters_in_row = 5,
-  img_size = NULL, img_qual = 300)
+  flag_simplify = TRUE, node_shape = "sphere",
+  num_clusters_in_row = 5, img_size = NULL, img_qual = 300)
 }
 \arguments{
 \item{clustering_result}{A list containing XINA clustering results. See \link[XINA]{xina_clustering}}

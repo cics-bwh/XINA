@@ -571,7 +571,7 @@ add_legend <- function(legend_location="bottomright", ...) {
 #' @param vertex.label.dist Distance between node and label. Default is 0.6
 #' @param vertex.label.cex Size of labels  Default is 0.8
 #' @param edge.arrow.size Size of edges  Default is 0.4
-#' @param vertex.size Size of nodes  Default is 0.4
+#' @param vertex.size Size of nodes  Default is 10
 #' @param vertex.shape You can choose node shape. Default is 'sphere'.  See \link[igraph]{shapes}
 #' @param legend_location If centrality_type is chosen,
 #' 'xina_plot_single' adds the color legend guiding rank of nodes based on the centrality score.
@@ -735,7 +735,7 @@ xina_plot_single <- function(xina_result, protein_list, centrality_type=NULL,
 #' @param vertex.label.dist Distance between node and label. Default is 0.6
 #' @param vertex.label.cex Size of labels  Default is 0.8
 #' @param edge.arrow.size Size of edges  Default is 0.4
-#' @param vertex.size Size of nodes  Default is 0.4
+#' @param vertex.size Size of nodes  Default is 10
 #' @param vertex.shape You can choose node shape. Default is 'sphere'.  See \link[igraph]{shapes}
 #' @param legend_location If centrality_type is chosen,
 #' xina_plot_single add the color legend guiding rank of nodes based on the centrality score.
@@ -867,7 +867,7 @@ xina_plot_bycluster <- function(xina_result, clustering_result,
 #' @param vertex.label.dist Distance between node and label. Default is 0.6
 #' @param vertex.label.cex Size of labels  Default is 0.8
 #' @param edge.arrow.size Size of edges  Default is 0.4
-#' @param vertex.size Size of nodes  Default is 0.4
+#' @param vertex.size Size of nodes  Default is 10
 #' @param vertex.shape You can choose node shape. Default is 'sphere'.  See \link[igraph]{shapes}
 #' @param legend_location If centrality_type is chosen,
 #' xina_plot_single add the color legend guiding rank of nodes based on the centrality score.

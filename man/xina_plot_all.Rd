@@ -8,10 +8,10 @@ xina_plot_all(xina_result, clustering_result, condition = "all",
   centrality_type = NULL, flag_simplify = TRUE, num_breaks = 5,
   layout_specified = "", vertex_label_flag = FALSE,
   vertex.label.color = "black", vertex.color = "", edge.color = NULL,
-  vertex.label.dist = 0.6, vertex.label.cex = 0.8, edge.arrow.size = 0.4,
-  vertex.size = 10, vertex.shape = "sphere", legend_location = "bottom",
-  num_clusters_in_row = 5, flag_unknown_only = FALSE, img_size = NULL,
-  img_qual = 300)
+  vertex.label.dist = 0.6, vertex.label.cex = 0.8,
+  edge.arrow.size = 0.4, vertex.size = 10, vertex.shape = "sphere",
+  legend_location = "bottom", num_clusters_in_row = 5,
+  flag_unknown_only = FALSE, img_size = NULL, img_qual = 300)
 }
 \arguments{
 \item{xina_result}{A list containing XINA network analysis results. See \link[XINA]{xina_analysis}}
@@ -68,7 +68,7 @@ If vertex_label_flag is FALSE, igraph network graphs will be drawn without label
 
 \item{edge.arrow.size}{Size of edges  Default is 0.4}
 
-\item{vertex.size}{Size of nodes  Default is 0.4}
+\item{vertex.size}{Size of nodes  Default is 10}
 
 \item{vertex.shape}{You can choose node shape. Default is 'sphere'.  See \link[igraph]{shapes}}
 

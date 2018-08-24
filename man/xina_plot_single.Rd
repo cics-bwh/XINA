@@ -9,8 +9,9 @@ xina_plot_single(xina_result, protein_list, centrality_type = NULL,
   vertex.label.color = "black", vertex.color = NA,
   edge.color = "darkgray", vertex.label.dist = 0.6,
   vertex.label.cex = 0.8, edge.arrow.size = 0.4, vertex.size = 10,
-  vertex.shape = "sphere", legend_location = "bottom", num_breaks = 5,
-  digits_round_up = 5, flag_simplify = TRUE, flag_legend = TRUE)
+  vertex.shape = "sphere", legend_location = "bottom",
+  num_breaks = 5, digits_round_up = 5, flag_simplify = TRUE,
+  flag_legend = TRUE)
 }
 \arguments{
 \item{xina_result}{A list containing XINA network analysis results. See \link[XINA]{xina_analysis}}
@@ -61,7 +62,7 @@ If vertex_label_flag is FALSE, igraph network graphs will be drawn without label
 
 \item{edge.arrow.size}{Size of edges  Default is 0.4}
 
-\item{vertex.size}{Size of nodes  Default is 0.4}
+\item{vertex.size}{Size of nodes  Default is 10}
 
 \item{vertex.shape}{You can choose node shape. Default is 'sphere'.  See \link[igraph]{shapes}}
 

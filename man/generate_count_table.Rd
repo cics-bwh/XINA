@@ -4,7 +4,8 @@
 \alias{generate_count_table}
 \title{generate_count_table}
 \usage{
-generate_count_table(clustering_result, selected_conditions, comigration_size)
+generate_count_table(clustering_result, selected_conditions,
+  comigration_size)
 }
 \arguments{
 \item{clustering_result}{A list containing XINA clustering results. See \link[XINA]{xina_clustering}}

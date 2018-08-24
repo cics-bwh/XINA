@@ -4,9 +4,9 @@
 \alias{make_random_xina_data}
 \title{make_random_xina_data}
 \usage{
-make_random_xina_data(n = 500, mtor = TRUE, time_points = c("0hr", "2hr",
-  "6hr", "12hr", "24hr", "48hr", "72hr"), conditions = c("Control",
-  "Stimulus1", "Stimulus2"))
+make_random_xina_data(n = 500, mtor = TRUE, time_points = c("0hr",
+  "2hr", "6hr", "12hr", "24hr", "48hr", "72hr"),
+  conditions = c("Control", "Stimulus1", "Stimulus2"))
 }
 \arguments{
 \item{n}{The number of proteins for one condition. Default is 500.}

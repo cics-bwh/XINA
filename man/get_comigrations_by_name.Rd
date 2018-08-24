@@ -4,8 +4,8 @@
 \alias{get_comigrations_by_name}
 \title{get_comigrations_by_name}
 \usage{
-get_comigrations_by_name(clustering_result, selected_conditions, protein_list,
-  cex = 0.7, alpha = 0.3)
+get_comigrations_by_name(clustering_result, selected_conditions,
+  protein_list, cex = 0.7, alpha = 0.3)
 }
 \arguments{
 \item{clustering_result}{A list containing XINA clustering results. See \link[XINA]{xina_clustering}}

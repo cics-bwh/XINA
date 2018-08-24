@@ -4,8 +4,8 @@
 \alias{plot_clusters}
 \title{plot_clusters}
 \usage{
-plot_clusters(clustering_result, y_lim = NULL, xval = NULL, xylab = TRUE,
-  ggplot_theme = NULL)
+plot_clusters(clustering_result, y_lim = NULL, xval = NULL,
+  xylab = TRUE, ggplot_theme = NULL)
 }
 \arguments{
 \item{clustering_result}{A list containing XINA clustering results.
