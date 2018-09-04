@@ -19,6 +19,10 @@ https://github.com/langholee/XINA/
 install.packages('devtools')
 library('devtools')
 install_github('langholee/XINA')
+
+# Install from Bioconductor
+install.packages("BiocManager")
+BiocManager::install("XINA")
 ```
 
 To follow this tutorial, you need these libraries. If you don't have the packages below, please install them.
