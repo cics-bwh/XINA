@@ -1,6 +1,5 @@
 #' Randomly generated example datasets for XINA users.
 #' A dataset containing the XINA clustering results.
-#' example_clusters
 #'
 #' \itemize{
 #'   \item aligned. XINA clustering results aligned by conditions
@@ -30,7 +29,6 @@ NULL
 
 #' Protein-protein interaction resource downloaded from HPRD DB
 #' A data frame containing HRPD protein-protein interaction data
-#' hprd_ppi
 #'
 #' \itemize{
 #'   \item gene_symbol_1. Gene name interacting with gene name
@@ -49,7 +47,6 @@ NULL
 #' Protein-protein interaction resource downloaded from STRING DB
 #' for XINA's example dataset
 #' A data frame containing protein-protein interactions
-#' string_example
 #'
 #' \itemize{
 #'   \item gene_symbol_1. Gene name interacting with gene name
@@ -66,7 +63,6 @@ NULL
 
 #' Previously processed xina analysis using XINA's random example data
 #' A list containing 'xina_analysis' results
-#' xina_result_example
 #'
 #' \itemize{
 #'   \item All_network. PPI network of all the input proteins
@@ -78,7 +74,6 @@ NULL
 #'   \item Titles.  A list of plot titles for XINA plotting
 #'   \item out_dir. A directory path storing XINA network analysis results
 #'   \item is_stringdb. False = different PPI DB and TRUE = STRING DB
-
 #' }
 #'
 #' @format A data frame containing STRING protein-protein interaction data
@@ -86,22 +81,9 @@ NULL
 #' @name xina_result_example
 NULL
 
-#' A character vector containing 19,396 human genes
-#' This is for the randome data generation of XINA
-#' gn
-#'
-#' \itemize{
-#'   \item Characters of human genes
-#' }
-#'
-#' @format A character vector containing 19,396 human genes
-#' @source \url{https://www.ncbi.nlm.nih.gov/gene}
-#' @name gn
-NULL
 
 #' A character vector containing 19,396 human gene descriptions
 #' This is for the randome data generation of XINA
-#' gn_desc
 #'
 #' \itemize{
 #'   \item Human gene description corresponding to 'gn' vector
@@ -110,4 +92,16 @@ NULL
 #' @format A character vector containing 19,396 human gene descriptions
 #' @source \url{https://www.ncbi.nlm.nih.gov/gene}
 #' @name gn_desc
+NULL
+
+#' A character vector containing 19,396 human genes
+#' This is for the randome data generation of XINA
+#'
+#' \itemize{
+#'   \item Characters of human genes
+#' }
+#'
+#' @format A character vector containing 19,396 human genes
+#' @source \url{https://www.ncbi.nlm.nih.gov/gene}
+#' @name gn
 NULL
