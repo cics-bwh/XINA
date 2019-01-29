@@ -1,0 +1,15 @@
+note <- sprintf("R package version %s", meta$Version)
+
+bibentry(
+    bibtype = "Article",
+    title = "XINA: a workflow for the integration of multiplexed proteomics kinetics data with network analysis",
+    author = c(person("Lang Ho ", "Lee"),
+            person("Arda", "Halu"),
+            person("Stephanie", "Morgan"),
+            person("Hiroshi", "Iwata"),
+            person("Masanori", "Aikawa"),
+            person("Sasha", "Singh")),
+    journal = "Journal of Proteome Research",
+    year = "2019",
+    note = "https://pubs.acs.org/doi/10.1021/acs.jproteome.8b00615"
+)

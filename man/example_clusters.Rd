@@ -3,8 +3,7 @@
 \name{example_clusters}
 \alias{example_clusters}
 \title{Randomly generated example datasets for XINA users.
-A dataset containing the XINA clustering results.
-example_clusters}
+A dataset containing the XINA clustering results.}
 \format{A list with the example XINA clustering result}
 \description{
 \itemize{

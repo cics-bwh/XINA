@@ -3,8 +3,7 @@
 \name{gn}
 \alias{gn}
 \title{A character vector containing 19,396 human genes
-This is for the randome data generation of XINA
-gn}
+This is for the randome data generation of XINA}
 \format{A character vector containing 19,396 human genes}
 \source{
 \url{https://www.ncbi.nlm.nih.gov/gene}

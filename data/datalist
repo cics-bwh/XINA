@@ -1,5 +1,6 @@
 xina_example: example_clusters
 HPRD: hprd_ppi
-gene_info: gn_desc, gn
+gene_info: gn_desc
+gene_info: gn
 string_example: string_example
 xina_result_example: xina_result_example

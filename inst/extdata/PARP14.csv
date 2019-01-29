@@ -1,0 +1,5 @@
+"Gene name","Description","M0","M_IFNg","M_IL4"
+"TAP2","Transporter 2 ATP-binding cassette sub-family B (MDR/TAP) OS=Homo sapiens GN=TAP2 PE=2 SV=1 - [Q5HY71_HUMAN]","21","30","7"
+"LPCAT2","Lysophosphatidylcholine acyltransferase 2 OS=Homo sapiens GN=LPCAT2 PE=1 SV=1 - [PCAT2_HUMAN]","21","30","14"
+"GCLM","Glutamate--cysteine ligase regulatory subunit OS=Homo sapiens GN=GCLM PE=1 SV=1 - [GSH0_HUMAN]","21","30","17"
+"PARP14","Isoform 4 of Poly [ADP-ribose] polymerase 14 OS=Homo sapiens GN=PARP14 - [PAR14_HUMAN]","21","30","17"

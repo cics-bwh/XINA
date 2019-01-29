@@ -1,35 +1,55 @@
 ------
-title: "XINA: a workflow for the integration of multiplexed proteomics kinetics data with network analysis"
-output: rmarkdown::html_vignette
+title: "Introduction to the XINA pagkage"
+author: "Lang Ho Lee, Sasha A. Singh"
+date: "September 17, 2018"
 vignette: >
-  %\VignetteIndexEntry{xina_user_code}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{utf-8}
+  %\VignetteIndexEntry{xina_user_code}
+output:
+    knitr:::html_vignette:
+        df_print: kable
+        toc: true
+        number_sections: true
 ------
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+options(width=120)
+knitr::opts_chunk$set(
+    echo=TRUE
+)
 ```
 
 ### 1. Introduction
-The use of network medicine tools to view broad biological systems has become the standard in the field, replacing reductionist, one-protein-one-pathway concepts.  Quantitative proteomics experiments provide large amounts of information with great potential for network analyses. Moreover, tandem mass tagging approaches are conducive to kinetics-based studies that can include more than one stimulation condition, producing multiple kinetics datasets to be compared for subsequent network analyses. Despite the growing need to integrate network approaches, however, few practical bioinformatics tools are available to do so.  To address this disconnect, we developed a high-dimensional data analysis strategy and accompanying software that multiplexes isobaric mass tagged-based kinetics data for network analysis (XINA) with the aim to identify coregulated protein networks. 
+Quantitative proteomics experiments, using for instance isobaric tandem mass tagging approaches, are conducive to measuring changes in protein abundance over multiple time points in response to one or more conditions or stimulations. The aim of XINA is to determine which proteins exhibit similar patterns within and across experimental conditions, since proteins with co-abundance patterns may have common molecular functions. XINA imports multiple datasets, tags dataset in silico, and combines the data for subsequent subgrouping into multiple clusters. The result is a single output depicting the variation across all conditions. XINA, not only extracts co-abundance profiles within and across experiments, but also incorporates protein-protein interaction databases and integrative resources such as KEGG to infer interactors and molecular functions, respectively, and produces intuitive graphical outputs. 
 
-### 2. XINA references
+#### 1-1. Main contribution
+  An easy-to-use software for non-expert users of clustering and network analyses.
+
+#### 1-2. Data inputs
+  Any type of quantitative proteomics data, labeled or label-free
+
+### 2. XINA websites
 https://cics.bwh.harvard.edu/software
-
+http://bioconductor.org/packages/XINA/
 https://github.com/langholee/XINA/
 
 ### 3. XINA installation
+XINA requires R>=3.5.0.
 ```{r installation, eval=FALSE}
-# XINA requires R >= 3.5.1
-install.packages('devtools')
-library('devtools')
-install_github('langholee/XINA')
+# Install from Bioconductor
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("XINA")
 ```
 
-To follow this tutorial, you need these libraries. If you don't have the packages below, please install them.
+The first step is to call XINA
 ``` {r import libraries}
 library(XINA)
+```
+
+To follow this vignette, you may need the following packages
+```{r import required packages}
 library(igraph)
 library(ggplot2)
 library(STRINGdb)
@@ -142,19 +162,17 @@ plot_clusters(example_clusters, ggplot_theme=theme1)
 
 XINA calculates sample condition composition, for example the sample composition in the cluster 22 is 93.10% for Stimulus2. 'plot_condition_composition'  plots these compositions as pie-charts. Sample composition information is insightful because we can find which specific patterns are closely related with each stimulus. 
 ```{r XINA condition composition}
-condition_composition <- plot_condition_compositions(example_clusters)
+theme2 <- theme(legend.key.size = unit(0.3, "cm"),
+                legend.text=element_text(size=5),
+                title=element_text(size=7, face='bold'))
+condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme2)
+
 tail(condition_composition)
 ```
 
 You can modify the condition composition plot with ggplot theme. For example, you can remove the legend.
 ```{r XINA condition composition2, eval=FALSE}
-theme2 <- theme(legend.position="none", title=element_text(size=7, face='bold'))
-condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme2)
-
-# Or you can adjust the legend size.
-theme3 <- theme(legend.key.size = unit(0.3, "cm"),
-                legend.text=element_text(size=5),
-                title=element_text(size=7, face='bold'))
+theme3 <- theme(legend.position="none", title=element_text(size=7, face='bold'))
 condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme3)
 
 # You can utilize your own colors for condition composition charts.
@@ -164,10 +182,10 @@ names(condition_colors) <- example_clusters$condition
 example_clusters$color_for_condition <- condition_colors
 
 # Draw condition composition pie-chart with the new color code
-condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme3)
+condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme2)
 
 # XINA also can draw bull's-eye plots instead of pie-charts.
-condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme3, bullseye = TRUE)
+condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme2, bullseye = TRUE)
 ```
 
 Based on the condition composition pie-charts, we can see some of clusters are mostly coming from specific stimuli or conditions. For example, almost 96.30% proteins in the cluster #19 come from the Stimulus2 condition and around 95.00% of cluster #20 proteins are from Stimulus1. XINA provides a function named as 'mutate_colors' to generate colors based on the condition composition. If there are biased condition compositions, such as higher than 50%, 'mutate_colors' assigns a color according to 'color_for_clusters' parameter of the XINA clustering result. Otherwise, 'mutate_colors' will assign null_color, gray by default. By changing 'color_for_clusters' parameter of the XINA clustering result, you can recolor the XINA clustering plot.
@@ -256,13 +274,15 @@ string_db
 
 STRING DB provides PPI confidence score so that users can adjust to get more convincing or more comprehensive PPI networks. 
 ```{r select PPI confidence level of STRING DB, eval=FALSE}
-get.edge.attribute(sub_graph)$combined_score
+get.edge.attribute(string_db$graph)$combined_score
 
 # Medium confidence PPIs only
-string_db_med_confidence <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=400), delete.vertices = TRUE)
+string_db_med_confidence <- string_db
+string_db_med_confidence$graph <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=400), delete.vertices = TRUE)
 
 # High confidence PPIs only
-string_db_high_confidence <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=700), delete.vertices = TRUE)
+string_db_high_confidence <- string_db
+string_db_high_confidence$graph <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=700), delete.vertices = TRUE)
 ```
 
 When you run XINA network analysis, you need XINA clustering results and STRING db object. 
@@ -432,3 +452,5 @@ plot_enrichment_results(go_enriched$Process, num_terms=20)
 plot_enrichment_results(go_enriched$Function, num_terms=20)
 plot_enrichment_results(go_enriched$Component, num_terms=20)
 ```
+
+[Back to Top](#TOC)

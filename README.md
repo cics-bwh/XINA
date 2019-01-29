@@ -2,7 +2,11 @@
 XINA: a workflow for the integration of multiplexed proteomics kinetics data with network analysis
 
 ### 1. Introduction
-The use of network medicine tools to view broad biological systems has become the standard in the field, replacing reductionist, one-protein-one-pathway concepts.  Quantitative proteomics experiments provide large amounts of information with great potential for network analyses. Moreover, tandem mass tagging approaches are conducive to kinetics-based studies that can include more than one stimulation condition, producing multiple kinetics datasets to be compared for subsequent network analyses. Despite the growing need to integrate network approaches, however, few practical bioinformatics tools are available to do so.  To address this disconnect, we developed a high-dimensional data analysis strategy and accompanying software that multiplexes isobaric mass tagged-based kinetics data for network analysis (XINA) with the aim to identify coregulated protein networks. 
+Quantitative proteomics experiments, using for instance isobaric tandem mass tagging approaches, are conducive to measuring changes in protein abundance over multiple time points in response to one or more conditions or stimulations. The aim of XINA is to determine which proteins exhibit similar patterns within and across experimental conditions, since proteins with co-abundance patterns may have common molecular functions. XINA imports multiple datasets, tags dataset in silico, and combines the data for subsequent subgrouping into multiple clusters. The result is a single output depicting the variation across all conditions. XINA, not only extracts co-abundance profiles within and across experiments, but also incorporates protein-protein interaction databases and integrative resources such as KEGG to infer interactors and molecular functions, respectively, and produces intuitive graphical outputs. 
+
+Main contribution: an easy-to-use software for non-expert users of clustering and network analyses.
+
+Data inputs: any type of quantitative proteomics data, label or label-free
 
 ### 2. XINA references
 https://cics.bwh.harvard.edu/software
@@ -15,6 +19,11 @@ https://github.com/langholee/XINA/
 install.packages('devtools')
 library('devtools')
 install_github('langholee/XINA')
+
+# Install from Bioconductor
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("XINA")
 ```
 
 To follow this tutorial, you need these libraries. If you don't have the packages below, please install them.
@@ -427,17 +436,16 @@ plot_enrichment_results(go_enriched$Component, num_terms=20)
 ```
 ### 6. Authors
 Lee, Lang Ho, Ph.D.   <lhlee@bwh.harvard.edu>
-
 Singh, Sasha A.,Ph.D. <sasingh@bwh.harvard.edu>
+Aikawa, Masanori, M.D. Ph.D. <maikawa@bwh.harvard.edu>
 
 ### 7. Maintainers
 Lee, Lang Ho, Ph.D.   <lhlee@bwh.harvard.edu>
-
 Singh, Sasha A.,Ph.D. <sasingh@bwh.harvard.edu>
 
 
 ### 8. Copyright and license
-Copyright (C) <2018>  Lang Ho Lee and Sasha A. Singh
+Copyright (C) <2019>  Lang Ho Lee, Sasha A. Singh and Masanori Aikawa
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License any 

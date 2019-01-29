@@ -3,8 +3,7 @@
 \name{gn_desc}
 \alias{gn_desc}
 \title{A character vector containing 19,396 human gene descriptions
-This is for the randome data generation of XINA
-gn_desc}
+This is for the randome data generation of XINA}
 \format{A character vector containing 19,396 human gene descriptions}
 \source{
 \url{https://www.ncbi.nlm.nih.gov/gene}

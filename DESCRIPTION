@@ -1,33 +1,66 @@
 Package: XINA
 Type: Package
-Title: Multiplexes isobaric mass tagged-based kinetics data for network analysis
-Version: 0.99.8
-Date: 2018-08-23
-Author: Lee, Lang Ho and Singh, Sasha A.
-Authors@R: c(person("Lang Ho", "Lee", email = "langholee@gmail.com",  role = c("aut", "cre")), person("Sasha", "Singh", email = "sasingh@bwh.harvard.edu",  role = c("aut")))
-Maintainer: Lang Ho Lee <langholee@gmail.com> and Sasha A. Singh <sasingh@bwh.harvard.edu>
-Description: An intuitive R package simplifies network analyses output from multiplexed high-dimensional proteomics/trascriptomics kinetics data.
-Copyright:
-    XINA combines multiple quantitative (kinetics) datasets from omics studies into a single input dataset for clustering.
-    Copyright(C)2018 Lang Ho Lee, Arda Halu, Stephanie Morgan, Hiroshi Iwata, Masanori Aikawa, and Sasha A. Singh
-    This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, any later version.
-    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
-    - Contact emails:
-    L. Lee, LHLEE@BWH.HARVARD.EDU 
-    S. Singh, SASINGH@BWH.HARVARD.EDU  
-    M. Aikawa, MAIKAWA@BWH.HARVARD.EDU 
-    - Mailing address: 
-    Department of Medicine, Cardiovascular Division
-    Center for Interdisciplinary Cardiovascular Sciences
-    3 Blackfan Street, 17th Floor
-    Boston, MA 02115
-    USA
-Encoding: UTF-8
-LazyData: true
-License: GPL-3
-Depends: R (>= 3.5), Biobase
-Imports: mclust, plyr, alluvial, ggplot2, igraph, gridExtra, tools, grDevices, graphics, utils, STRINGdb
+Title: Multiplexes Isobaric Mass Tagged-based Kinetics Data 
+      for Network Analysis
+Version: 1.0.1
 biocViews: SystemsBiology, Proteomics, RNASeq, Network
-RoxygenNote: 6.1.0
+Author: Lang Ho Lee <langholee@gmail.com> and 
+        Sasha A. Singh <sasingh@bwh.harvard.edu>
+Maintainer: Lang Ho Lee <langholee@gmail.com> and 
+            Sasha A. Singh <sasingh@bwh.harvard.edu>
+Authors@R: c(person("Lang Ho", "Lee", email="langholee@gmail.com",  
+	      role = c("aut", "cre")), 
+	      person("Sasha", "Singh", email="sasingh@bwh.harvard.edu", 
+	      role = c("aut")))
+Description: The aim of XINA is to determine which proteins 
+	     exhibit similar patterns within and across experimental 
+	     conditions, since proteins with co-abundance patterns may 
+	     have common molecular functions. XINA imports multiple 
+	     datasets, tags dataset in silico, and combines the data 
+	     for subsequent subgrouping into multiple clusters. 
+	     The result is a single output depicting the variation 
+	     across all conditions. XINA, not only extracts coabundance 
+	     profiles within and across experiments, but also 
+	     incorporates protein-protein interaction databases and 
+	     integrative resources such as KEGG to infer interactors 
+	     and molecular functions, respectively, and produces 
+	     intuitive graphical outputs. 
+Copyright:
+	XINA combines multiple quantitative (kinetics) datasets 
+	from omics studies into a single input dataset for clustering.
+	Copyright(C)2018 Lang Ho Lee, Arda Halu, Stephanie Morgan, 
+	Hiroshi Iwata, Masanori Aikawa, and Sasha A. Singh
+	This program is free software: you can redistribute it 
+	and/or modify it under the terms of the GNU General Public 
+	License as published by the Free Software Foundation, 
+	either version 3 of the License, any later version.
+	This program is distributed in the hope that it will be useful, 
+	but WITHOUT ANY WARRANTY; without even the implied warranty 
+	of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+	See the GNU General Public License for more details. 
+	You should have received a copy of the GNU General Public 
+	License along with this program.  
+	If not, see <https://www.gnu.org/licenses/>.
+	- Contact emails:
+	L. Lee, LHLEE@BWH.HARVARD.EDU 
+	S. Singh, SASINGH@BWH.HARVARD.EDU  
+	M. Aikawa, MAIKAWA@BWH.HARVARD.EDU 
+	- Mailing address: 
+	Department of Medicine, Cardiovascular Division
+	Center for Interdisciplin ary Cardiovascular Sciences
+	3 Blackfan Street, 17th Floor
+	Boston, MA 02115
+	USA
+License: GPL-3
+Imports: mclust, plyr, alluvial, ggplot2, igraph, gridExtra, tools, 
+	 grDevices, graphics, utils, STRINGdb
 VignetteBuilder: knitr
+LazyData: FALSE
+RoxygenNote: 6.1.1
+Encoding: UTF-8
+Depends: R (>= 3.5), Biobase
 Suggests: knitr, rmarkdown
+Date: 2018-09-17
+git_url: https://git.bioconductor.org/packages/xina
+git_branch: master
+git_last_commit: 897b60b

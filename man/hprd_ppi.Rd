@@ -3,8 +3,7 @@
 \name{hprd_ppi}
 \alias{hprd_ppi}
 \title{Protein-protein interaction resource downloaded from HPRD DB
-A data frame containing HRPD protein-protein interaction data
-hprd_ppi}
+A data frame containing HRPD protein-protein interaction data}
 \format{A data frame containing HRPD protein-protein interaction data}
 \source{
 \url{http://www.hprd.org/}

@@ -4,8 +4,7 @@
 \alias{string_example}
 \title{Protein-protein interaction resource downloaded from STRING DB
 for XINA's example dataset
-A data frame containing protein-protein interactions
-string_example}
+A data frame containing protein-protein interactions}
 \format{A data frame containing STRING protein-protein interaction data}
 \source{
 \url{https://string-db.org/}

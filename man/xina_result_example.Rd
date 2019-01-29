@@ -3,8 +3,7 @@
 \name{xina_result_example}
 \alias{xina_result_example}
 \title{Previously processed xina analysis using XINA's random example data
-A list containing 'xina_analysis' results
-xina_result_example}
+A list containing 'xina_analysis' results}
 \format{A data frame containing STRING protein-protein interaction data}
 \source{
 XINA
