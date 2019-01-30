@@ -22,6 +22,13 @@ knitr::opts_chunk$set(
 
 ### 1. Introduction
 Quantitative proteomics experiments, using for instance isobaric tandem mass tagging approaches, are conducive to measuring changes in protein abundance over multiple time points in response to one or more conditions or stimulations. The aim of XINA is to determine which proteins exhibit similar patterns within and across experimental conditions, since proteins with co-abundance patterns may have common molecular functions. XINA imports multiple datasets, tags dataset in silico, and combines the data for subsequent subgrouping into multiple clusters. The result is a single output depicting the variation across all conditions. XINA, not only extracts co-abundance profiles within and across experiments, but also incorporates protein-protein interaction databases and integrative resources such as KEGG to infer interactors and molecular functions, respectively, and produces intuitive graphical outputs. 
+<<<<<<< HEAD
+=======
+
+Main contribution: an easy-to-use software for non-expert users of clustering and network analyses.
+
+Data inputs: any type of quantitative proteomics data, label or label-free
+>>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
 
 #### 1-1. Main contribution
   An easy-to-use software for non-expert users of clustering and network analyses.
@@ -37,9 +44,19 @@ https://github.com/langholee/XINA/
 ### 3. XINA installation
 XINA requires R>=3.5.0.
 ```{r installation, eval=FALSE}
+<<<<<<< HEAD
 # Install from Bioconductor
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
+=======
+# Install from Github
+install.packages('devtools')
+library('devtools')
+install_github('langholee/XINA')
+
+# Install from Bioconductor
+install.packages("BiocManager")
+>>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
 BiocManager::install("XINA")
 ```
 

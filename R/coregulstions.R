@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 ##############################################
 # The deveroper and the maintainer:          #
 #   Lang Ho Lee (lhlee@bwh.harvard.edu)      #
 #   Sasha A. Singh (sasingh@bwh.harvard.edu) #
 ##############################################
+=======
+#############################################
+# The deveroper and the maintainer:         #
+#   Lang Ho Lee (lhlee@bwh.harvard.edu)     #
+#   Sasha A. Singh (sasingh@bwh.harvard.edu)#
+#############################################
+>>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
 
 # Mute warnings
 options(warn=1)

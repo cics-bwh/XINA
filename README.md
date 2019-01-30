@@ -21,8 +21,12 @@ library('devtools')
 install_github('langholee/XINA')
 
 # Install from Bioconductor
+<<<<<<< HEAD
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
+=======
+install.packages("BiocManager")
+>>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
 BiocManager::install("XINA")
 ```
 

@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 ##############################################
 # The deveroper and the maintainer:          #
 #   Lang Ho Lee (lhlee@bwh.harvard.edu)      #
 #   Sasha A. Singh (sasingh@bwh.harvard.edu) #
 ##############################################
+=======
+#############################################
+# The deveroper and the maintainer:         #
+#   Lang Ho Lee (lhlee@bwh.harvard.edu)     #
+#   Sasha A. Singh (sasingh@bwh.harvard.edu)#
+#############################################
+>>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
 
 # Mute warnings
 options(warn=1)
@@ -206,7 +214,11 @@ plot_condition_compositions <- function(clustering_result, bullseye=FALSE, ggplo
   # Draw plots
   list_output <- list()
   out_summary <- data.frame()
+<<<<<<< HEAD
   for (cn in seq_len(max(super_ds$Cluster)))
+=======
+  for (cn in seq_len(max_cluster))
+>>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
   {
     cl_subset <- subset(super_ds, Cluster == cn)
     g_summary <- ddply(cl_subset, c("Condition"), .drop=TRUE,
@@ -378,7 +390,11 @@ plot_clusters_all <- function(clustering_result, selected_condition=NULL)
   } else {
     title2show <- "Unclustered profiles of all"
   }
+<<<<<<< HEAD
   ggplot(all_prots, aes(x=x, y=z_levels_Sds, group=y, colour=condition)) +
+=======
+  ggplot(all_prots, aes(x=x, y=z_levels_Sds, condition=y, colour=condition)) +
+>>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
     geom_line() +
     scale_color_manual(values=color_for_condition) +
     geom_hline(yintercept=1/max(column_numbers), color="red", linetype="dashed")+
