@@ -10,24 +10,19 @@ Data inputs: any type of quantitative proteomics data, label or label-free
 
 ### 2. XINA references
 https://cics.bwh.harvard.edu/software
-
-https://github.com/langholee/XINA/
+http://bioconductor.org/packages/XINA/
 
 ### 3. XINA installation
 ```{r installation}
-# XINA requires R >= 3.5.1
-install.packages('devtools')
-library('devtools')
-install_github('langholee/XINA')
-
 # Install from Bioconductor
-<<<<<<< HEAD
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
-=======
-install.packages("BiocManager")
->>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
 BiocManager::install("XINA")
+
+# Install from Github
+install.packages("devtools")
+library(devtools)
+install_github("langholee/XINA")
 ```
 
 To follow this tutorial, you need these libraries. If you don't have the packages below, please install them.
@@ -99,8 +94,7 @@ clustering_result <- xina_clustering(data_files, data_column=data_column, nClust
 ```
 
 If you think the clustering cannot be optimized by the automatically selected covariance model (scored highest BIC), you can adjust the clustering results by appointing specific parameterisations of the within-condition covariance matrix.
-```{r XINA clustering with VVI covariance matrix, 
-=FALSE}
+```{r XINA clustering with VVI covariance matrix}
 # Model-based clustering using VVI covariance model
 clustering_result_vvi <- xina_clustering(data_files, data_column=data_column, nClusters=30, chosen_model='VVI')
 ```
@@ -123,17 +117,23 @@ data(xina_example)
 
 For visualizing clustering results, XINA draws line graphs of the clustering results using 'plot_clusters'.
 ```{r XINA clustering plot}
-plot_clusters(example_clusters, xylab=FALSE)
+plot_clusters(example_clusters)
 ```
 
-X axis information is considered as a ordinal variable in XINA's plot_clusters, but you can change it to be continuous variable. By setting xylab=FALSE, you can remove labels.
+Clustering plot without x label.
 ```{r clustering plot2}
 plot_clusters(example_clusters, xval=c(0,2,6,12,24,48,72), xylab=FALSE)
+```
 
+X axis information is considered as a ordinal variable in XINA's plot_clusters, but you can change it to be continuous variable.
+```{r clustering plot3}
 # You can change Y axis limits to be ranged from 0 to 0.35
-plot_clusters(example_clusters, y_lim=c(0,0.35), xval=c(0,2,6,12,24,48,72), xylab=FALSE)
+plot_clusters(example_clusters, y_lim=c(0,0.35), xval=c(0,2,6,12,24,48,72))
+```
 
-# If you need, you can modify the clustering plot by creating your own ggplot theme.
+If you need, you can modify the clustering plot by creating your own ggplot theme.
+This theme is for small font size of X axis ticks and the plot titles
+```{r clustering plot4}
 theme1 <- theme(title=element_text(size=8, face='bold'),
                 axis.text.x = element_text(size=7),
                 axis.text.y = element_blank(),
@@ -144,37 +144,71 @@ theme1 <- theme(title=element_text(size=8, face='bold'),
 plot_clusters(example_clusters, ggplot_theme=theme1)
 ```
 
-XINA calculates sample condition composition, for example the sample composition in the cluster 22 is 93.10% for Stimulus2. 'plot_condition_composition'  plots these compositions as pie-charts. Sample composition information is insightful because we can find which specific patterns are closely related with each stimulus. 
+Tiny font size and white background
+``` {r tmp}
+theme2 <- theme(plot.title=element_text(hjust=0, vjust=-1.5, size=5, face='bold'),
+                axis.text.x = element_text(size=3.5),
+                axis.text.y = element_blank(),
+                axis.ticks.x = element_blank(),
+                axis.ticks.y = element_blank(),
+                axis.title.x = element_blank(),
+                axis.title.y = element_blank(),
+                panel.background = element_blank(),
+                plot.margin = unit(c(0,0,0,0),"cm"))
+plot_clusters(example_clusters, ggplot_theme=theme2)
+```
+
+XINA calculates sample condition composition, for example the sample composition in the cluster 28 is higher than 95% for Stimulus2. 'plot_condition_composition' plots these compositions as pie-charts. Sample composition information is insightful because we can find which specific patterns are closely related with each stimulus. 
 ```{r XINA condition composition}
 condition_composition <- plot_condition_compositions(example_clusters)
 tail(condition_composition)
 ```
 
-You can modify the condition composition plot with ggplot theme. For example, you can remove the legend.
+Like XINA clustering plot, you can modify the condition composition charts using ggplot2 theme
+This is for small font size and small legend key size
 ```{r XINA condition composition2}
-theme2 <- theme(legend.position="none", title=element_text(size=7, face='bold'))
-condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme2)
-
-# Or you can adjust the legend size.
 theme3 <- theme(legend.key.size = unit(0.3, "cm"),
                 legend.text=element_text(size=5),
                 title=element_text(size=7, face='bold'))
 condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme3)
+```
 
-# You can utilize your own colors for condition composition charts.
+This is to draw the charts without the legend
+```{r XINA condition composition2}
+theme4 <- theme(legend.position="none", title=element_text(size=7, face='bold'))
+condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme4)
+```
+
+The large piechart without the legend
+```{r XINA condition composition3}
+theme5 <- theme(legend.position="none",
+                plot.title=element_text(hjust=0, vjust=-1.5, size=3, face='bold'),
+                panel.grid.major = element_blank(),
+                panel.grid.minor = element_blank(),
+                panel.background = element_blank(),
+                axis.text.x=element_blank(),
+                plot.margin = unit(c(-.1,-.1,-.1,-.1),"cm"))
+condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme = theme5)
+```
+
+You can change colors for the conditions
+```{r XINA condition composition4}
 # Make a new color code for conditions
 condition_colors <- c("tomato","steelblue1","gold")
 names(condition_colors) <- example_clusters$condition
 example_clusters$color_for_condition <- condition_colors
 
 # Draw condition composition pie-chart with the new color code
-condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme3)
-
-# XINA also can draw bull's-eye plots instead of pie-charts.
-condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme3, bullseye = TRUE)
+condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme2)
 ```
 
-Based on the condition composition pie-charts, we can see some of clusters are mostly coming from specific stimuli or conditions. For example, almost 96.30% proteins in the cluster #19 come from the Stimulus2 condition and around 95.00% of cluster #20 proteins are from Stimulus1. XINA provides a function named as 'mutate_colors' to generate colors based on the condition composition. If there are biased condition compositions, such as higher than 50%, 'mutate_colors' assigns a color according to 'color_for_clusters' parameter of the XINA clustering result. Otherwise, 'mutate_colors' will assign null_color, gray by default. By changing 'color_for_clusters' parameter of the XINA clustering result, you can recolor the XINA clustering plot.
+You can draw the bullseye plot.
+```{r bullseye}
+# XINA also can draw bull's-eye plots instead of pie-charts.
+condition_composition <- plot_condition_compositions(example_clusters, ggplot_theme=theme2, bullseye = TRUE)
+```
+
+Based on the condition composition pie-charts, we can see some of clusters are mostly coming from specific stimuli or conditions. Default threshold is 50%.
 ```{r clustering plot with condition colors}
 # New colors for the clustering plot based on condition composition
 example_clusters$color_for_clusters <- mutate_colors(condition_composition, example_clusters$color_for_condition)
@@ -192,7 +226,7 @@ plot_clusters(example_clusters, xval=c(0,2,6,12,24,48,72), xylab=FALSE)
 ```
 
 #### 5.2 coregulation analysis
-XINA supposes that proteins that comigrate between clusters in response to a given condition are more likely to be coregulated at the biological level than other proteins within the same clusters.  For this module, at least two datasets to be compared are needed. XINA supposes features assigned to the same cluster in an experiment condition as a coregulated group.  XINA traces the comigrated proteins in different experiment conditions and finds signficant trends by 1) the number of member features (proteins) and 2) the enrichment test using the Fisher's exact test.  The comigrations are displayed via an alluvial plot. In XINA the comigration is defined as a condition of proteins that show the same expression pattern, classified and evaluated by XINA clustering, in at least two dataset conditions.  If there are proteins that are assigned to the same cluster in more than two datasets, XINA considers those proteins to be comigrated. XINA's 'alluvial_enriched' is designed to find these comigrations and draws alluvial plots for visualizing the found comigrations.
+XINA supposes that proteins that comigrate between clusters in response to a given condition are more likely to be coregulated at the biological level than other proteins within the same clusters.  For this module, at least two datasets to be compared are needed. XINA supposes features assigned to the same cluster in an experiment condition as a coregulated group.  XINA traces the comigrated proteins in different experiment conditions and finds signficant trends by 1) the number of member features (proteins) and 2) the enrichment test using the Fishers exact test.  The comigrations are displayed via an alluvial plot. In XINA the comigration is defined as a condition of proteins that show the same expression pattern, classified and evaluated by XINA clustering, in at least two dataset conditions.  If there are proteins that are assigned to the same cluster in more than two datasets, XINA considers those proteins to be comigrated. XINA's 'alluvial_enriched' is designed to find these comigrations and draws alluvial plots for visualizing the found comigrations.
 ```{r XINA comigration search}
 classes <- as.vector(example_clusters$condition)
 classes
@@ -215,12 +249,8 @@ head(cor_bigger_than_10)
 
 From the size flitered comigrations, XINA provides one more filtering using the condition composition pie-charts. It is the limitation to condition-biased clusters. This enables to find coregulations related with the condition-specific patterns.  XINA assumes that one expression pattern is majorly found in one speficif experimental condition, that patterns is condition-biased.
 ``` {r finding the condition-biased clusters}
-condition_biased_comigrations <- get_condition_biased_comigrations(clustering_result=example_clusters, 
-                                                                   count_table=cor_bigger_than_10, 
-                                                                   selected_conditions=classes, 
-                                                                   condition_composition=condition_composition,
-                                                                   threshold_percent=50, color_for_null='gray',
-                                                                   color_for_highly_matched='yellow', cex = 1)
+condition_biased_comigrations <- get_condition_biased_comigrations(clustering_result=example_clusters,
+count_table=cor_bigger_than_10, selected_conditions=classes, condition_composition=condition_composition, threshold_percent=50, color_for_null='gray', color_for_highly_matched='yellow', cex = 1)
 ```
 
 In the alluvial plot displaying corregulations between three conditions, Control, Stimulus1 and Stimulus2, one large comigration protein condition is evident (tan color).  XINA can extract the proteins from this comigrated condition.
@@ -236,12 +266,12 @@ nrow(proteins_found_in_condition_biased_clusters)
 head(proteins_found_in_condition_biased_clusters)
 ```
 
-If you compare only two conditions, you can apply Fisher's exact test to measure how significantly any given comigration condition is with respect to all in the comparison. The following 2x2 table was used to calculate the p-value from the Fisher's exact test.
+If you compare only two conditions, you can apply Fishers exact test to measure how significantly any given comigration condition is with respect to all in the comparison. The following 2x2 table was used to calculate the p-value from the Fisher's exact test.
 To evaluate significance of comigrated proteins from cluster #1 in control to cluster #2 in a test condition,
 
-                           | cluster #1 in control  |    other clusters in control
+                           | cluster 1 in control   |    other clusters in control
     -----------------------|------------------------|------------------------------
-    cluster #2 in test     | 65 (TP)                |    175 (FP)
+    cluster 2 in test      | 65 (TP)                |    175 (FP)
     other clusters in test | 35 (FN)                |    1079 (TN)
 
 ```{r comigrations with comigration size and significance filters}
@@ -258,18 +288,18 @@ string_db <- STRINGdb$new( version="10", species=9606, score_threshold=0, input_
 string_db
 ```
 
-
 STRING DB provides PPI confidence score so that users can adjust to get more convincing or more comprehensive PPI networks. 
-```{r select PPI confidence level of STRING DB, eval=FALSE}
-get.edge.attribute(sub_graph)$combined_score
+```{r select PPI confidence level of STRING DB}
+get.edge.attribute(string_db$graph)$combined_score
 
 # Medium confidence PPIs only
-string_db_med_confidence <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=400), delete.vertices = TRUE)
+string_db_med_confidence <- string_db
+string_db_med_confidence$graph <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=400), delete.vertices = TRUE)
 
 # High confidence PPIs only
-string_db_high_confidence <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=700), delete.vertices = TRUE)
+string_db_high_confidence <- string_db
+string_db_high_confidence$graph <- subgraph.edges(string_db$graph, which(E(string_db$graph)$combined_score>=700), delete.vertices = TRUE)
 ```
-
 
 When you run XINA network analysis, you need XINA clustering results and STRING db object. 
 ```{r XINA analysis with STRING DB}
@@ -292,19 +322,19 @@ xina_result_hprd <- xina_analysis(example_clusters, ppi_db_hprd, is_stringdb=FAL
 You can draw PPI networks of all the XINA clusters using 'xina_plots' function easily.  PPI network plots will be stored in the working directory
 ```{r plotting PPI networks of all the clusters}
 # XINA network plots labeled gene names
-xina_plots(xina_result, example_clusters)
+xina_plot_all(xina_result, example_clusters)
 ```
 
 If node labels are excessive and the nodes cannot be visualized, labels can be removed.
 ```{r xina_plots without labels}
 # XINA network plots without labels
-xina_plots(xina_result, example_clusters, vertex_label_flag=FALSE)
+xina_plot_all(xina_result, example_clusters, vertex_label_flag=FALSE)
 ```
 
 The PPI network layout can be changed. XINA's available layout options are c('sphere','star','gem','tree','circle','random','nicely'). If you need more information about igraph layouts, see http://igraph.org/r/doc/layout_.html
 ```{r xina_plots with tree layout}
 # Plot PPI networks with tree layout
-xina_plots(xina_result, example_clusters, vertex_label_flag=FALSE, layout_specified='tree')
+xina_plot_all(xina_result, example_clusters, vertex_label_flag=FALSE, layout_specified='tree')
 ```
 
 If you want to draw protein-protein interaction networks for a cluster, use 'xina_plot_bycluster'.
@@ -342,12 +372,7 @@ xina_plot_all(xina_result, example_clusters, condition="Stimulus2", centrality_t
               edge.color = 'gray', img_size=img_size)
 ```
 
-XINA employs STRINGdb package to conduct enrichment tests using KEGG pathway and GO terms.
-```{r enrichment tests}
-enriched_fdr_0.05 <- xina_enrichment(xina_result, example_clusters, string_db, pval_threshold=0.05)
-```
-
-Using 'alluvial_enriched'XINA will input the comigrated alluvial plot results and apply the network analysis tools and evaluate them by their network centrality using several network centrality scores, such as degree, eigenvector and hub. XINA ranks proteins by centrality score.
+Using 'alluvial_enriched' XINA will input the comigrated alluvial plot results and apply the network analysis tools and evaluate them by their network centrality using several network centrality scores, such as degree, eigenvector and hub. XINA ranks proteins by centrality score.
 ```{r network analysis of comigrated proteins}
 protein_list <- proteins_found_in_condition_biased_clusters$`Gene name`
 protein_list
@@ -438,6 +463,7 @@ plot_enrichment_results(go_enriched$Process, num_terms=20)
 plot_enrichment_results(go_enriched$Function, num_terms=20)
 plot_enrichment_results(go_enriched$Component, num_terms=20)
 ```
+
 ### 6. Authors
 Lee, Lang Ho, Ph.D.   <lhlee@bwh.harvard.edu>
 Singh, Sasha A.,Ph.D. <sasingh@bwh.harvard.edu>
