@@ -1,5 +1,9 @@
 # XINA
 XINA: a workflow for the integration of multiplexed proteomics kinetics data with network analysis
+Lang Ho Lee, Arda Halu, Stephanie Morgan, Hiroshi Iwata, Masanori Aikawa, and Sasha A. Singh
+Journal of Proteome Research DOI: 10.1021/acs.jproteome.8b00615
+
+https://pubs.acs.org/doi/10.1021/acs.jproteome.8b00615
 
 ### 1. Introduction
 Quantitative proteomics experiments, using for instance isobaric tandem mass tagging approaches, are conducive to measuring changes in protein abundance over multiple time points in response to one or more conditions or stimulations. The aim of XINA is to determine which proteins exhibit similar patterns within and across experimental conditions, since proteins with co-abundance patterns may have common molecular functions. XINA imports multiple datasets, tags dataset in silico, and combines the data for subsequent subgrouping into multiple clusters. The result is a single output depicting the variation across all conditions. XINA, not only extracts co-abundance profiles within and across experiments, but also incorporates protein-protein interaction databases and integrative resources such as KEGG to infer interactors and molecular functions, respectively, and produces intuitive graphical outputs. 
