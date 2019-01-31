@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 ##############################################
 # The deveroper and the maintainer:          #
 #   Lang Ho Lee (lhlee@bwh.harvard.edu)      #
 #   Sasha A. Singh (sasingh@bwh.harvard.edu) #
 ##############################################
-=======
-#############################################
-# The deveroper and the maintainer:         #
-#   Lang Ho Lee (lhlee@bwh.harvard.edu)     #
-#   Sasha A. Singh (sasingh@bwh.harvard.edu)#
-#############################################
->>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
 
 # Mute warnings
 options(warn=1)
@@ -26,7 +18,11 @@ get_theme_blank <- function(){
     axis.text.x=element_blank(),
     axis.text.y=element_blank(),
     axis.ticks.x=element_blank(),
-    axis.ticks.y=element_blank()
+    axis.ticks.y=element_blank(),
+    panel.border = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(colour = "white")
   ))
 }
 
@@ -123,6 +119,7 @@ plot_NA <- function() {
   plot(1, type="n", axes=FALSE, xlab="", ylab="", main="Not Available")
 }
 
+
 #' @title get_colors
 #' @description Generate color series for XINA graphics
 #' @param nClusters The number of clusters
@@ -214,43 +211,45 @@ plot_condition_compositions <- function(clustering_result, bullseye=FALSE, ggplo
   # Draw plots
   list_output <- list()
   out_summary <- data.frame()
-<<<<<<< HEAD
-  for (cn in seq_len(max(super_ds$Cluster)))
-=======
   for (cn in seq_len(max_cluster))
->>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
   {
     cl_subset <- subset(super_ds, Cluster == cn)
-    g_summary <- ddply(cl_subset, c("Condition"), .drop=TRUE,
-                       .fun = function(xx, col) {
-                         c(N    = length2(xx[[col]], na.rm=TRUE))},
-                       c("Condition"))
-    g_summary$Percent_ratio <- round((g_summary$N/sum(g_summary$N))*100, 2)
-    out_summary <- rbind(out_summary,cbind(Cluster=cn, g_summary))
     plot_title <- paste("#",cn, " (n=",nrow(cl_subset),")", sep='')
-    if (bullseye) {
-      # Bullseye plot
-      # http://ggplot2.tidyverse.org/reference/coord_polar.html
-      list_output[[cn]] <- ggplot(cl_subset, aes(x = factor(1), fill = factor(Condition))) +
-        geom_bar(width = 1) + coord_polar() +
-        labs(title = plot_title) +
-        scale_fill_manual(values=color_for_nodes) +
-        get_theme_blank() +
-        guides(fill=guide_legend(title=NULL))
-    } else {
-      # PieChart
-      # http://www.sthda.com/english/wiki/ggplot2-pie-chart-quick-start-guide-r-software-and-data-visualization
+    if (nrow(cl_subset)==0) {
+      g_summary <- data.frame(Condition=as.vector(unique(super_ds$Condition)),N=NA,Percent_ratio=NA)
       list_output[[cn]] <- ggplot(g_summary, aes(x="", y=Percent_ratio, fill=Condition)) +
-        geom_bar(width = 1, stat = "identity") +
-        coord_polar("y", start=0) +
-        labs(title = plot_title) +
-        scale_fill_manual(values=color_for_nodes) +
-        get_theme_blank() +
-        guides(fill=guide_legend(title=NULL))
+        labs(title = plot_title) + geom_blank() + theme_bw() + get_theme_blank()
+    } else {
+      g_summary <- ddply(cl_subset, c("Condition"), .drop=TRUE,
+                         .fun = function(xx, col) {
+                           c(N    = length2(xx[[col]], na.rm=TRUE))},
+                         c("Condition"))
+      g_summary$Percent_ratio <- round((g_summary$N/sum(g_summary$N))*100, 2)
+      if (bullseye) {
+        # Bullseye plot
+        # http://ggplot2.tidyverse.org/reference/coord_polar.html
+        list_output[[cn]] <- ggplot(cl_subset, aes(x = factor(1), fill = factor(Condition))) +
+          geom_bar(width = 1) + coord_polar() +
+          labs(title = plot_title) +
+          scale_fill_manual(values=color_for_nodes) +
+          get_theme_blank() +
+          guides(fill=guide_legend(title=NULL))
+      } else {
+        # PieChart
+        # http://www.sthda.com/english/wiki/ggplot2-pie-chart-quick-start-guide-r-software-and-data-visualization
+        list_output[[cn]] <- ggplot(g_summary, aes(x="", y=Percent_ratio, fill=Condition)) +
+          geom_bar(width = 1, stat = "identity") +
+          coord_polar("y", start=0) +
+          labs(title = plot_title) +
+          scale_fill_manual(values=color_for_nodes) +
+          get_theme_blank() +
+          guides(fill=guide_legend(title=NULL))
+      }
     }
     if (!is.null(ggplot_theme)) {
       list_output[[cn]] <- list_output[[cn]] + ggplot_theme
     }
+    out_summary <- rbind(out_summary,cbind(Cluster=cn, g_summary))
   }
   do.call(grid.arrange,list_output)
   return(out_summary)
@@ -341,7 +340,8 @@ plot_clusters <- function(clustering_result, y_lim=NULL, xval=NULL, xylab=TRUE, 
         plot_out[[i]] <- plot_out[[i]] + ggplot_theme
       }
     } else {
-      plot_NA()
+      plot_out[[i]] <- plot_NA()
+      print(paste("Cluster #",i," doesn't have any members", sep=''))
     }
   }
   do.call(gridExtra::grid.arrange,plot_out)
@@ -390,14 +390,10 @@ plot_clusters_all <- function(clustering_result, selected_condition=NULL)
   } else {
     title2show <- "Unclustered profiles of all"
   }
-<<<<<<< HEAD
   ggplot(all_prots, aes(x=x, y=z_levels_Sds, group=y, colour=condition)) +
-=======
-  ggplot(all_prots, aes(x=x, y=z_levels_Sds, condition=y, colour=condition)) +
->>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
     geom_line() +
     scale_color_manual(values=color_for_condition) +
-    geom_hline(yintercept=1/max(column_numbers), color="red", linetype="dashed")+
+    geom_hline(yintercept=1/max(column_numbers), color="red", linetype="dashed") +
     labs(x = "", y = paste("Normalized intensity by",clustering_result$norm_method)) +
     labs(title =  title2show) +
     scale_x_continuous(breaks=column_numbers, labels=data_column)

@@ -1,15 +1,14 @@
 Package: XINA
 Type: Package
-<<<<<<< HEAD
 Title: Multiplexes Isobaric Mass Tagged-based Kinetics Data 
       for Network Analysis
-Version: 1.0.1
+Version: 1.0.2
 biocViews: SystemsBiology, Proteomics, RNASeq, Network
-Author: Lang Ho Lee <langholee@gmail.com> and 
+Author: Lang Ho Lee <lhlee@bwh.harvard.edu> and 
         Sasha A. Singh <sasingh@bwh.harvard.edu>
-Maintainer: Lang Ho Lee <langholee@gmail.com> and 
+Maintainer: Lang Ho Lee <lhlee@bwh.harvard.edu> and 
             Sasha A. Singh <sasingh@bwh.harvard.edu>
-Authors@R: c(person("Lang Ho", "Lee", email="langholee@gmail.com",  
+Authors@R: c(person("Lang Ho", "Lee", email="lhlee@bwh.harvard.edu",  
 	      role = c("aut", "cre")), 
 	      person("Sasha", "Singh", email="sasingh@bwh.harvard.edu", 
 	      role = c("aut")))
@@ -52,32 +51,6 @@ Copyright:
 	3 Blackfan Street, 17th Floor
 	Boston, MA 02115
 	USA
-=======
-Title: Multiplexes isobaric mass tagged-based kinetics data for network analysis
-Version: 0.99.13
-Date: 2018-08-23
-Author: Lee, Lang Ho and Singh, Sasha A.
-Authors@R: c(person("Lang Ho", "Lee", email = "langholee@gmail.com",  role = c("aut", "cre")), person("Sasha", "Singh", email = "sasingh@bwh.harvard.edu",  role = c("aut")))
-Maintainer: Lang Ho Lee <langholee@gmail.com> and Sasha A. Singh <sasingh@bwh.harvard.edu>
-Description: An intuitive R package simplifies network analyses output from multiplexed high-dimensional proteomics/trascriptomics kinetics data.
-Copyright:
-    XINA combines multiple quantitative (kinetics) datasets from omics studies into a single input dataset for clustering.
-    Copyright(C)2018 Lang Ho Lee, Arda Halu, Stephanie Morgan, Hiroshi Iwata, Masanori Aikawa, and Sasha A. Singh
-    This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, any later version.
-    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
-    - Contact emails:
-    L. Lee, LHLEE@BWH.HARVARD.EDU 
-    S. Singh, SASINGH@BWH.HARVARD.EDU  
-    M. Aikawa, MAIKAWA@BWH.HARVARD.EDU 
-    - Mailing address: 
-    Department of Medicine, Cardiovascular Division
-    Center for Interdisciplin ary Cardiovascular Sciences
-    3 Blackfan Street, 17th Floor
-    Boston, MA 02115
-    USA
-Encoding: UTF-8
-LazyData: FALSE
->>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
 License: GPL-3
 Imports: mclust, plyr, alluvial, ggplot2, igraph, gridExtra, tools, 
 	 grDevices, graphics, utils, STRINGdb
@@ -87,7 +60,7 @@ RoxygenNote: 6.1.1
 Encoding: UTF-8
 Depends: R (>= 3.5), Biobase
 Suggests: knitr, rmarkdown
-Date: 2018-09-17
+Date: 2019-01-31
 git_url: https://git.bioconductor.org/packages/xina
 git_branch: master
 git_last_commit: 897b60b

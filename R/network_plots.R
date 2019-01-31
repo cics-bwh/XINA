@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 ##############################################
 # The deveroper and the maintainer:          #
 #   Lang Ho Lee (lhlee@bwh.harvard.edu)      #
 #   Sasha A. Singh (sasingh@bwh.harvard.edu) #
 ##############################################
-=======
-#############################################
-# The deveroper and the maintainer:         #
-#   Lang Ho Lee (lhlee@bwh.harvard.edu)     #
-#   Sasha A. Singh (sasingh@bwh.harvard.edu)#
-#############################################
->>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
 
 # Mute warnings
 options(warn=1)
@@ -453,19 +445,23 @@ xina_plot_all <- function(xina_result, clustering_result, condition='all',
   par(mar=c(1,1,1,1))
   # Draw individual XINA network plots
   for (i in seq_len(max_cluster)){
-    if (is.null(edge.color)){
-      edge_color <- unique(E(xina_result$Sub_network[[i]])$edge.color)
+    if (is.null(xina_result$Sub_network[[i]])){
+      plot_NA()
     } else {
-      edge_color <- edge.color
+      if (is.null(edge.color)){
+        edge_color <- unique(E(xina_result$Sub_network[[i]])$edge.color)
+      } else {
+        edge_color <- edge.color
+      }
+      xina_plot_bycluster(xina_result, clustering_result, cl=i, condition=condition, flag_legend=FALSE,
+                          centrality_type=centrality_type, flag_simplify=flag_simplify,
+                          edge.color=edge_color, vertex.color=vertex.color,
+                          layout_specified=layout_specified, vertex_label_flag=vertex_label_flag,
+                          vertex.label.dist=vertex.label.dist, vertex.label.cex=vertex.label.cex,
+                          edge.arrow.size=edge.arrow.size, vertex.size=vertex.size,
+                          vertex.shape=vertex.shape, legend_location=legend_location,
+                          flag_unknown_only=flag_unknown_only)
     }
-    xina_plot_bycluster(xina_result, clustering_result, cl=i, condition=condition, flag_legend=FALSE,
-                        centrality_type=centrality_type, flag_simplify=flag_simplify,
-                        edge.color=edge_color, vertex.color=vertex.color,
-                        layout_specified=layout_specified, vertex_label_flag=vertex_label_flag,
-                        vertex.label.dist=vertex.label.dist, vertex.label.cex=vertex.label.cex,
-                        edge.arrow.size=edge.arrow.size, vertex.size=vertex.size,
-                        vertex.shape=vertex.shape, legend_location=legend_location,
-                        flag_unknown_only=flag_unknown_only)
   }
   dev.off()
 }
@@ -480,10 +476,7 @@ xina_plot_all <- function(xina_result, clustering_result, condition='all',
 #' @param sig_score significant score to plot on X axis. Default is "pvalue".
 #' @param num_terms The number of terms to be plotted.  Default is 0, which menas no limit.
 #' @param get_log If this is TRUE, 'plot_enrichment_results' will take -log10 of p-values.
-<<<<<<< HEAD
 #' @param fill_color Default is 'darkgray'. You can change color of bars.
-=======
->>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
 #' @return ggplot bar graph
 #' @import ggplot2
 #' @export
@@ -514,12 +507,8 @@ xina_plot_all <- function(xina_result, clustering_result, condition='all',
 #' }
 #'
 plot_enrichment_results <- function(enriched_results, term_description="term_description",
-<<<<<<< HEAD
                                     sig_score="pvalue", num_terms=0, get_log=TRUE,
                                     fill_color='darkgray'){
-=======
-                                    sig_score="pvalue", num_terms=0, get_log=TRUE){
->>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
   Enriched_score <- NULL
   # requireNamespace("dplyr", quietly = TRUE)
   enriched_results <- enriched_results[!is.na(enriched_results$term_description), ]
@@ -542,11 +531,7 @@ plot_enrichment_results <- function(enriched_results, term_description="term_des
   enriched_results %>%
     arrange(Enriched_score) %>%
     mutate(term_description = factor(term_description, term_description)) %>%   # reset factor
-<<<<<<< HEAD
     ggplot(aes(term_description, Enriched_score)) + geom_bar(stat="identity", fill=fill_color) + coord_flip() + ylab(y_lab)
-=======
-    ggplot(aes(term_description, Enriched_score)) + geom_bar(stat="identity") + coord_flip() + ylab(y_lab)
->>>>>>> 897b60ba80ec40f31146fc7e7fffb563da4f3b87
 }
 
 #' @title default_size

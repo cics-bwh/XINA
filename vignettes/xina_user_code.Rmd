@@ -373,11 +373,6 @@ xina_plot_all(xina_result, example_clusters, condition="Stimulus2", centrality_t
               edge.color = 'gray', img_size=img_size)
 ```
 
-XINA employs STRINGdb package to conduct enrichment tests using KEGG pathway and GO terms.
-```{r enrichment tests, eval=FALSE}
-enriched_fdr_0.05 <- xina_enrichment(xina_result, example_clusters, string_db, pval_threshold=0.05)
-```
-
 Using 'alluvial_enriched'XINA will input the comigrated alluvial plot results and apply the network analysis tools and evaluate them by their network centrality using several network centrality scores, such as degree, eigenvector and hub. XINA ranks proteins by centrality score.
 ```{r network analysis of comigrated proteins}
 protein_list <- proteins_found_in_condition_biased_clusters$`Gene name`
