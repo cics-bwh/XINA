@@ -180,21 +180,24 @@ xina_plot_single <- function(xina_result, protein_list, centrality_type=NULL,
       layout_selected <- get_layout(subnet)
     }
     if (is.null(centrality_type)) {
-      vector_colors <- vertex.color
+      vertex_colors <- vertex.color
     } else {
+      if (is.na(vertex.color)) {
+        vertex.color <- "red"
+      }
       centrality_score <- calculate_centrality_scores(subnet, centrality_type)
       centrality_results <- data.frame(Gene_Name=V(subnet)$name,
                                        Description=V(subnet)$desc,
                                        Score=centrality_score,
                                        Rank=rank_centrality(centrality_score,centrality_type,num_breaks=num_breaks))
       tgc <- get_stats(centrality_results)
-      rbPal <- colorRampPalette(c("white", "red"))
-      vector_colors <- rbPal(num_breaks)[centrality_results$Rank]
+      rbPal <- colorRampPalette(c("white", vertex.color))
+      vertex_colors <- rbPal(num_breaks)[centrality_results$Rank]
     }
     plot(subnet, vertex.label.color="black", layout=layout_selected,
          vertex.label.dist=vertex.label.dist, vertex.label.cex=vertex.label.cex,
          vertex.label=vertex_label, edge.arrow.size=edge.arrow.size,
-         vertex.size=vertex.size, vertex.color=vector_colors,
+         vertex.size=vertex.size, vertex.color=vertex_colors,
          edge.color=edge.color, vertex.shape=vertex.shape, main=main)
     # return centrality scores
     if (!is.null(centrality_type)) {

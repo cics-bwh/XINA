@@ -2,7 +2,7 @@ Package: XINA
 Type: Package
 Title: Multiplexes Isobaric Mass Tagged-based Kinetics Data 
       for Network Analysis
-Version: 1.0.2
+Version: 1.0.3
 biocViews: SystemsBiology, Proteomics, RNASeq, Network
 Author: Lang Ho Lee <lhlee@bwh.harvard.edu> and 
         Sasha A. Singh <sasingh@bwh.harvard.edu>
