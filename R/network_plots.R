@@ -25,7 +25,7 @@ options(warn=1)
 #' # Extract unknown PPI nodes in the cluster #1
 #' get_unknown_ppi_nodes(xina_result_example, 1)
 #'
-get_unknown_ppi_nodes <- function(xina_result, cl){
+get_unknown_ppi_nodes <- function(xina_result, cl) {
   subnet <- xina_result$Sub_network[[cl]]
   isolated_nodes <- V(subnet)[degree(subnet)==0]
   df_subnet <- data.frame(Name=isolated_nodes$name, Condition=isolated_nodes$condition, Color=isolated_nodes$vertex.color)

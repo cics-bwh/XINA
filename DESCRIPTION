@@ -2,7 +2,7 @@ Package: XINA
 Type: Package
 Title: Multiplexes Isobaric Mass Tagged-based Kinetics Data 
       for Network Analysis
-Version: 1.0.3
+Version: 1.0.4
 biocViews: SystemsBiology, Proteomics, RNASeq, Network
 Author: Lang Ho Lee <lhlee@bwh.harvard.edu> and 
         Sasha A. Singh <sasingh@bwh.harvard.edu>
@@ -58,7 +58,7 @@ VignetteBuilder: knitr
 LazyData: FALSE
 RoxygenNote: 6.1.1
 Encoding: UTF-8
-Depends: R (>= 3.5), Biobase
+Depends: R (>= 3.5)
 Suggests: knitr, rmarkdown
 Date: 2019-01-31
 git_url: https://git.bioconductor.org/packages/xina

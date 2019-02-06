@@ -5,7 +5,7 @@
 \title{plot_clusters}
 \usage{
 plot_clusters(clustering_result, y_lim = NULL, xval = NULL,
-  xylab = TRUE, ggplot_theme = NULL)
+  xtickmark = NULL, xylab = TRUE, ggplot_theme = NULL)
 }
 \arguments{
 \item{clustering_result}{A list containing XINA clustering results.
@@ -15,8 +15,11 @@ See \link[XINA]{xina_clustering}}
 'plot_clusters' will plot line graphs scaled from 0 to 1 in y-axis
 Default is NULL, which means unscaled line graphs.}
 
-\item{xval}{Change X axis values and labels.
-Default is data_column of the clustering result list}
+\item{xval}{XINA basically considers time points as a ordinary variable, like 1,2,3,4...n.
+You can make the time points as a continuous variable using xval.}
+
+\item{xtickmark}{Change X axis tick marks.
+Default is data_column of the clustering result list.}
 
 \item{xylab}{If it is FALSE, x and y labels will be blank.
 If it is TRUE (defualt), x and y labels will be shown.}

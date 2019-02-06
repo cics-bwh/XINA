@@ -372,7 +372,7 @@ alluvial_enriched <- function(clustering_result, selected_conditions, comigratio
   if (length(selected_conditions)<2){
     stop("'selected_conditions' requires at least two")
   } else if (length(selected_conditions)>2) {
-    warning("length(selected_conditions) > 2, so XINA can't apply the enrichment filter
+    print("length(selected_conditions) > 2, so XINA can't apply the enrichment filter
             Can't apply the enrichment filter, so pval_threshold is ignored")
     pval_threshold <- 1
   }

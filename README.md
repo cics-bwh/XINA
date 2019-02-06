@@ -125,14 +125,20 @@ plot_clusters(example_clusters)
 ```
 
 Clustering plot without x label.
-```{r clustering plot2}
-plot_clusters(example_clusters, xval=c(0,2,6,12,24,48,72), xylab=FALSE)
+```{r clustering plot2, eval=TRUE, warning=FALSE}
+plot_clusters(example_clusters, xylab=FALSE)
 ```
 
 X axis information is considered as a ordinal variable in XINA's plot_clusters, but you can change it to be continuous variable.
-```{r clustering plot3}
+```{r clustering plot3, eval=TRUE, warning=FALSE}
+# Convert the time points from the ordinary to the continuous variables
+plot_clusters(example_clusters, xval=c(0,2,6,12,24,48,72))
+
+# You can change x axis tick marks
+plot_clusters(example_clusters, xval=c(0,2,6,12,24,48,72), xtickmark = c(0,2,6,12,24,48,72))
+
 # You can change Y axis limits to be ranged from 0 to 0.35
-plot_clusters(example_clusters, y_lim=c(0,0.35), xval=c(0,2,6,12,24,48,72))
+plot_clusters(example_clusters, y_lim=c(0,0.35), xval=c(0,2,6,12,24,48,72), xtickmark = c(0,2,6,12,24,48,72))
 ```
 
 If you need, you can modify the clustering plot by creating your own ggplot theme.

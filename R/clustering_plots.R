@@ -265,8 +265,10 @@ plot_condition_compositions <- function(clustering_result, bullseye=FALSE, ggplo
 #' @param y_lim Y axis limit. If you set y_lim=c(0,1),
 #' 'plot_clusters' will plot line graphs scaled from 0 to 1 in y-axis
 #' Default is NULL, which means unscaled line graphs.
-#' @param xval Change X axis values and labels.
-#' Default is data_column of the clustering result list
+#' @param xval XINA basically considers time points as a ordinary variable, like 1,2,3,4...n.
+#' You can make the time points as a continuous variable using xval.
+#' @param xtickmark Change X axis tick marks.
+#' Default is data_column of the clustering result list.
 #' @param xylab If it is FALSE, x and y labels will be blank.
 #' If it is TRUE (defualt), x and y labels will be shown.
 #' @param ggplot_theme This is ggplot theme to modify XINA clustering plot.
@@ -292,7 +294,8 @@ plot_condition_compositions <- function(clustering_result, bullseye=FALSE, ggplo
 #' axis.title.y = element_blank())
 #' plot_clusters(example_clusters, ggplot_theme=theme1)
 #'
-plot_clusters <- function(clustering_result, y_lim=NULL, xval=NULL, xylab=TRUE, ggplot_theme=NULL)
+plot_clusters <- function(clustering_result, y_lim=NULL, xval=NULL,
+                          xtickmark=NULL, xylab=TRUE, ggplot_theme=NULL)
 {
   Cluster <- indviduals <- x <- y <- NULL
   clustering_dir <- clustering_result$out_dir
@@ -303,10 +306,11 @@ plot_clusters <- function(clustering_result, y_lim=NULL, xval=NULL, xylab=TRUE, 
   # X axis set up
   if (is.null(xval)) {
     column_numbers <- seq_len(length(data_column))
-    xtick_label <- data_column
   } else {
     column_numbers <- xval
-    xtick_label <- xval
+  }
+  if (is.null(xtickmark)) {
+    xtickmark <- data_column
   }
   # Plot parameter setting
   color_for_graph <- clustering_result$color_for_clusters
@@ -329,7 +333,7 @@ plot_clusters <- function(clustering_result, y_lim=NULL, xval=NULL, xylab=TRUE, 
         geom_line(colour = color_for_graph[i]) +
         geom_hline(yintercept=1/length(data_column), color="red", linetype="dashed") +
         labs(x="", y="", title=plt_title) +
-        scale_x_continuous(breaks=column_numbers, labels=xtick_label)
+        scale_x_continuous(breaks=column_numbers, labels=xtickmark)
       if(!xylab){
         plot_out[[i]] <- plot_out[[i]] + get_theme_blank()
       }
