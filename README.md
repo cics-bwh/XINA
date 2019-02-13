@@ -26,7 +26,7 @@ BiocManager::install("XINA")
 # Install from Github
 install.packages("devtools")
 library(devtools)
-install_github("langholee/XINA")
+install_github("cics-bwh/XINA")
 ```
 
 To follow this tutorial, you need these libraries. If you don't have the packages below, please install them.
